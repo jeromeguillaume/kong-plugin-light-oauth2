@@ -243,6 +243,7 @@ Create a Route to provide the `/.well-known/openid-configuration` details of the
   - config.api_specification=put this spec: [externalRestApi.yaml](/externalRestApi/swagger.yaml)
   - config.include_base_path=`true`
   - Click on `Save`
+
 The mocked response of the `External REST API` is:
 ```json
 {
