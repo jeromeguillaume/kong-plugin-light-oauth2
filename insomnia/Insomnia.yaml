@@ -1,0 +1,328 @@
+_type: export
+__export_format: 4
+__export_date: 2025-03-13T15:01:42.887Z
+__export_source: insomnia.desktop.app:v10.2.0
+resources:
+  - _id: req_9ba3756b39744407b853628c7191c2a4
+    parentId: fld_0e391af5b3dc4d26bb81b11c69ec69cb
+    modified: 1741877528237
+    created: 1741776092740
+    url: http://{{ _.host }}/light-oauth2/login/anything
+    name: /light-oauth2/login (client1)
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/10.2.0
+    authentication:
+      type: basic
+      useISO88591: false
+      disabled: false
+      username: "{{ _.idp_client_id }}"
+      password: "{{ _.idp_client_secret }}"
+    metaSortKey: -1741247268529
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_0e391af5b3dc4d26bb81b11c69ec69cb
+    parentId: wrk_1d18b66e322b4a4ebe685737a32a8324
+    modified: 1741877159257
+    created: 1741776092743
+    name: Domain API
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1741127119646.5
+    environmentType: kv
+    _type: request_group
+  - _id: wrk_1d18b66e322b4a4ebe685737a32a8324
+    parentId: null
+    modified: 1741877266957
+    created: 1741877084590
+    name: Plugin Light OAuth2
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: req_305502759e4d4376b5c514b55c913523
+    parentId: fld_0e391af5b3dc4d26bb81b11c69ec69cb
+    modified: 1741878020058
+    created: 1741776092740
+    url: http://{{ _.host }}/light-oauth2/access/anything
+    name: /light-oauth2/access
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/10.2.0
+    authentication:
+      type: bearer
+      token: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImprdSI6Imh0dHBzOi8va29uZy1nYXRld2F5Ojg0NDMvYXV0aC9lbmdpZS9qd2tzIiwia2lkIjoia29uZyJ9.eyJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJkZWZhdWx0LXJvbGVzLWplcm9tZSIsInVtYV9hdXRob3JpemF0aW9uIl19LCJleHAiOjE3NDE4Nzk4MTEsImF6cCI6ImNvbnRhY3RAa29uZ2hxLmNvbSIsInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJpc3MiOiJodHRwczovL2tvbmctZ2F0ZXdheTo4NDQzL2F1dGgvZW5naWUiLCJhdWQiOiJodHRwOi8vaHR0cGJpbi5hcGltLmV1L2FueXRoaW5nIiwiaWF0IjoxNzQxODc4MDExLCJ0eXAiOiJCZWFyZXIiLCJzdWIiOiJjYzE2M2ZmNS1iZmMxLTRkNmYtYTFjMS02YjAzZTI5NWY2MmYiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImFjciI6IjEiLCJjbGllbnRIb3N0IjoiOTAuMy42Ni4yMjciLCJjbGllbnRBZGRyZXNzIjoiOTAuMy42Ni4yMjciLCJqdGkiOiIzZmRmOWNlYS1kZTEyLTRhMGQtOWNiYS04OTA1MjExMWZmY2MiLCJzY29wZSI6Im9wZW5pZCBlbWFpbCBwcm9maWxlIiwibGlzdGVSZWZlcmVuY2VTSSI6W3siaWRlbnRpZmlhbnRTSSI6IlB0d3FJbk9FIiwiZW50aXRlIjoiVGJZS1Fsa3ciLCJhcHBsaWNhdGlvbiI6IlA0T054WDFHOGZhZkk2b1BmQiJ9XSwibGlzdGVJZEVuZ2llQjJDUmF0dGFjaGVlcyI6W3siaWRFbmdpZUIyQ0ZpbHMiOiJrRXZyVVJ6IiwiZGF0ZVJhdHRhY2hlbWVudCI6IjIwMjUtMDMtMTNUMTU6MDA6MTFaIiwibGlzdGVSZWZlcmVuY2VTSSI6W3siaWRlbnRpZmlhbnRTSSI6IkUiLCJlbnRpdGUiOiJxNGZrVXpVQkE5U1oiLCJhcHBsaWNhdGlvbiI6IiJ9XX1dLCJjbGllbnRJZCI6ImNvbnRhY3RAa29uZ2hxLmNvbSIsInByZWZlcnJlZF91c2VybmFtZSI6InNlcnZpY2UtYWNjb3VudC1jb250YWN0QGtvbmdocS5jb20ifQ.fNhYp_gPPWhW30q_8uvHRSxNpwwAmEgHa6GV1d1fPnhcwpvaydbYvvsuuX_lQOHAKX9atBuHN39vMxOv4Peg_8_R-KxOtEK5-2HmbxfhhnFjR0QqECM-Zqd1a_7EyuVEh2CNTJFHIfkRPdUKdBlSFrK6uENxBruvnsINz5FRUcIpY-QEeCqY82VQbtFDGwT0tI97J-3gODxOxp2qrYbsHYSWZAvB0qwXbx_Ht2fJLgllsCE7XO6X795pzRoHya6QOOKd0JWDUDWi5AgpxiT0wPF0hFvxmoifAcdfRIDkqYcReTfsyniCjWncvKoOwnMAa1_HUwVPvqAgkzldYP8A-g
+      disabled: false
+    metaSortKey: -1741247268429
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_8ac4dc18d64c477b82a011f7ae86fec2
+    parentId: fld_0e391af5b3dc4d26bb81b11c69ec69cb
+    modified: 1741877227555
+    created: 1741776092744
+    url: http://{{ _.host }}/refssi-identites-rattachees
+    name: /refssi-identites-rattachees
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers:
+      - name: User-Agent
+        value: insomnia/10.2.0
+    authentication:
+      type: basic
+      useISO88591: false
+      disabled: false
+      username: "{{ _.contact_id }}"
+      password: "{{ _.contact_secret }}"
+    metaSortKey: -1741247268229
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_0f7bd5479134416f9f7f9434031e5384
+    parentId: fld_a153e0e9278049c4b53424f283f0bc94
+    modified: 1741877563156
+    created: 1741776161144
+    url: http://{{ _.host }}/auth/engie/.well-known/openid-configuration
+    name: /.well-known
+    description: ""
+    method: GET
+    body: {}
+    parameters:
+      - id: pair_7e160c28580b4bf8b684d67dc5b9b286
+        name: ""
+        value: ""
+        description: ""
+        disabled: false
+    headers:
+      - name: User-Agent
+        value: insomnia/10.2.0
+    authentication:
+      type: none
+    metaSortKey: -1741777923573
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_a153e0e9278049c4b53424f283f0bc94
+    parentId: wrk_1d18b66e322b4a4ebe685737a32a8324
+    modified: 1741877285623
+    created: 1741777906200
+    name: IdP Endpoints
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1741127119546.5
+    environmentType: kv
+    _type: request_group
+  - _id: req_8ea920acbaf94bce8fade488a098249c
+    parentId: fld_a153e0e9278049c4b53424f283f0bc94
+    modified: 1741878032189
+    created: 1741776092738
+    url: http://{{ _.host }}/auth/engie/introspect
+    name: /auth/engie/introspect (admin)
+    description: ""
+    method: POST
+    body:
+      mimeType: application/x-www-form-urlencoded
+      params:
+        - id: pair_f76698b7b4df4905b998dc332a3b550a
+          name: token_type_hint
+          value: access_token
+          description: ""
+          disabled: false
+        - id: pair_b5e6e92e72b3409cbea8f67c98281fa6
+          name: token
+          value: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImprdSI6Imh0dHBzOi8va29uZy1nYXRld2F5Ojg0NDMvYXV0aC9lbmdpZS9qd2tzIiwia2lkIjoia29uZyJ9.eyJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJkZWZhdWx0LXJvbGVzLWplcm9tZSIsInVtYV9hdXRob3JpemF0aW9uIl19LCJleHAiOjE3NDE4Nzk4MTEsImF6cCI6ImNvbnRhY3RAa29uZ2hxLmNvbSIsInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJpc3MiOiJodHRwczovL2tvbmctZ2F0ZXdheTo4NDQzL2F1dGgvZW5naWUiLCJhdWQiOiJodHRwOi8vaHR0cGJpbi5hcGltLmV1L2FueXRoaW5nIiwiaWF0IjoxNzQxODc4MDExLCJ0eXAiOiJCZWFyZXIiLCJzdWIiOiJjYzE2M2ZmNS1iZmMxLTRkNmYtYTFjMS02YjAzZTI5NWY2MmYiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImFjciI6IjEiLCJjbGllbnRIb3N0IjoiOTAuMy42Ni4yMjciLCJjbGllbnRBZGRyZXNzIjoiOTAuMy42Ni4yMjciLCJqdGkiOiIzZmRmOWNlYS1kZTEyLTRhMGQtOWNiYS04OTA1MjExMWZmY2MiLCJzY29wZSI6Im9wZW5pZCBlbWFpbCBwcm9maWxlIiwibGlzdGVSZWZlcmVuY2VTSSI6W3siaWRlbnRpZmlhbnRTSSI6IlB0d3FJbk9FIiwiZW50aXRlIjoiVGJZS1Fsa3ciLCJhcHBsaWNhdGlvbiI6IlA0T054WDFHOGZhZkk2b1BmQiJ9XSwibGlzdGVJZEVuZ2llQjJDUmF0dGFjaGVlcyI6W3siaWRFbmdpZUIyQ0ZpbHMiOiJrRXZyVVJ6IiwiZGF0ZVJhdHRhY2hlbWVudCI6IjIwMjUtMDMtMTNUMTU6MDA6MTFaIiwibGlzdGVSZWZlcmVuY2VTSSI6W3siaWRlbnRpZmlhbnRTSSI6IkUiLCJlbnRpdGUiOiJxNGZrVXpVQkE5U1oiLCJhcHBsaWNhdGlvbiI6IiJ9XX1dLCJjbGllbnRJZCI6ImNvbnRhY3RAa29uZ2hxLmNvbSIsInByZWZlcnJlZF91c2VybmFtZSI6InNlcnZpY2UtYWNjb3VudC1jb250YWN0QGtvbmdocS5jb20ifQ.fNhYp_gPPWhW30q_8uvHRSxNpwwAmEgHa6GV1d1fPnhcwpvaydbYvvsuuX_lQOHAKX9atBuHN39vMxOv4Peg_8_R-KxOtEK5-2HmbxfhhnFjR0QqECM-Zqd1a_7EyuVEh2CNTJFHIfkRPdUKdBlSFrK6uENxBruvnsINz5FRUcIpY-QEeCqY82VQbtFDGwT0tI97J-3gODxOxp2qrYbsHYSWZAvB0qwXbx_Ht2fJLgllsCE7XO6X795pzRoHya6QOOKd0JWDUDWi5AgpxiT0wPF0hFvxmoifAcdfRIDkqYcReTfsyniCjWncvKoOwnMAa1_HUwVPvqAgkzldYP8A-g
+          description: ""
+          disabled: false
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/x-www-form-urlencoded
+        id: pair_366349e666fa434999d20fcaeafa8fc3
+      - name: User-Agent
+        value: insomnia/10.2.0
+        id: pair_cdb289c7a5b14481a5f7f9094028c054
+    authentication:
+      type: basic
+      useISO88591: false
+      disabled: false
+      username: "{{ _.admin_light_oaut2_id }}"
+      password: "{{ _.admin_light_oaut2_pwd }}"
+    metaSortKey: -1741777923473
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_42961a05a1474c7db2e66c3fbec5474d
+    parentId: fld_a153e0e9278049c4b53424f283f0bc94
+    modified: 1741878043514
+    created: 1741776092737
+    url: http://{{ _.host }}/auth/engie/revoke
+    name: /auth/engie/revoke
+    description: ""
+    method: POST
+    body:
+      mimeType: application/x-www-form-urlencoded
+      params:
+        - id: pair_f76698b7b4df4905b998dc332a3b550a
+          name: token_type_hint
+          value: access_token
+          description: ""
+          disabled: false
+        - id: pair_b5e6e92e72b3409cbea8f67c98281fa6
+          name: token
+          value: ehbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImprdSI6Imh0dHBzOi8va29uZy1nYXRld2F5Ojg0NDMvYXV0aC9lbmdpZS9qd2tzIiwia2lkIjoia29uZyJ9.eyJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJkZWZhdWx0LXJvbGVzLWplcm9tZSIsInVtYV9hdXRob3JpemF0aW9uIl19LCJleHAiOjE3NDE4Nzk4MTEsImF6cCI6ImNvbnRhY3RAa29uZ2hxLmNvbSIsInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJpc3MiOiJodHRwczovL2tvbmctZ2F0ZXdheTo4NDQzL2F1dGgvZW5naWUiLCJhdWQiOiJodHRwOi8vaHR0cGJpbi5hcGltLmV1L2FueXRoaW5nIiwiaWF0IjoxNzQxODc4MDExLCJ0eXAiOiJCZWFyZXIiLCJzdWIiOiJjYzE2M2ZmNS1iZmMxLTRkNmYtYTFjMS02YjAzZTI5NWY2MmYiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImFjciI6IjEiLCJjbGllbnRIb3N0IjoiOTAuMy42Ni4yMjciLCJjbGllbnRBZGRyZXNzIjoiOTAuMy42Ni4yMjciLCJqdGkiOiIzZmRmOWNlYS1kZTEyLTRhMGQtOWNiYS04OTA1MjExMWZmY2MiLCJzY29wZSI6Im9wZW5pZCBlbWFpbCBwcm9maWxlIiwibGlzdGVSZWZlcmVuY2VTSSI6W3siaWRlbnRpZmlhbnRTSSI6IlB0d3FJbk9FIiwiZW50aXRlIjoiVGJZS1Fsa3ciLCJhcHBsaWNhdGlvbiI6IlA0T054WDFHOGZhZkk2b1BmQiJ9XSwibGlzdGVJZEVuZ2llQjJDUmF0dGFjaGVlcyI6W3siaWRFbmdpZUIyQ0ZpbHMiOiJrRXZyVVJ6IiwiZGF0ZVJhdHRhY2hlbWVudCI6IjIwMjUtMDMtMTNUMTU6MDA6MTFaIiwibGlzdGVSZWZlcmVuY2VTSSI6W3siaWRlbnRpZmlhbnRTSSI6IkUiLCJlbnRpdGUiOiJxNGZrVXpVQkE5U1oiLCJhcHBsaWNhdGlvbiI6IiJ9XX1dLCJjbGllbnRJZCI6ImNvbnRhY3RAa29uZ2hxLmNvbSIsInByZWZlcnJlZF91c2VybmFtZSI6InNlcnZpY2UtYWNjb3VudC1jb250YWN0QGtvbmdocS5jb20ifQ.fNhYp_gPPWhW30q_8uvHRSxNpwwAmEgHa6GV1d1fPnhcwpvaydbYvvsuuX_lQOHAKX9atBuHN39vMxOv4Peg_8_R-KxOtEK5-2HmbxfhhnFjR0QqECM-Zqd1a_7EyuVEh2CNTJFHIfkRPdUKdBlSFrK6uENxBruvnsINz5FRUcIpY-QEeCqY82VQbtFDGwT0tI97J-3gODxOxp2qrYbsHYSWZAvB0qwXbx_Ht2fJLgllsCE7XO6X795pzRoHya6QOOKd0JWDUDWi5AgpxiT0wPF0hFvxmoifAcdfRIDkqYcReTfsyniCjWncvKoOwnMAa1_HUwVPvqAgkzldYP8A-g
+          description: ""
+          disabled: false
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/x-www-form-urlencoded
+      - name: User-Agent
+        value: insomnia/10.2.0
+    authentication:
+      type: basic
+      useISO88591: false
+      disabled: false
+      username: "{{ _.admin_light_oaut2_id }}"
+      password: "{{ _.admin_light_oaut2_pwd }}"
+    metaSortKey: -1741777923373
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_4d4f7b74b5674df29e95b128a127c5f5
+    parentId: wrk_1d18b66e322b4a4ebe685737a32a8324
+    modified: 1741877608144
+    created: 1741776092735
+    name: Base Environment
+    data:
+      host: localhost:8000
+      admin_light_oaut2_id: admin@engie.com
+      admin_light_oaut2_pwd: Engie!2025
+      contact_id: contact@konghq.com
+      contact_secret: SekYdVVQPlEMaq23CF2t4SV2seEI8Pg8
+    dataPropertyOrder:
+      "&":
+        - host
+        - admin_light_oaut2_id
+        - admin_light_oaut2_pwd
+        - contact_id
+        - contact_secret
+    color: null
+    isPrivate: false
+    metaSortKey: 1741178981575
+    environmentType: json
+    kvPairData: []
+    _type: environment
+  - _id: jar_0fd8d4b840304c89828f8bafef1c830c
+    parentId: wrk_1d18b66e322b4a4ebe685737a32a8324
+    modified: 1741776092736
+    created: 1741776092736
+    name: Default Jar
+    cookies:
+      - key: KC_RESTART
+        expires: 1970-01-01T00:00:10.000Z
+        maxAge: 0
+        domain: sso.apim.eu
+        path: /auth/realms/Jerome/
+        secure: true
+        httpOnly: true
+        extensions:
+          - Version=1
+        hostOnly: true
+        creation: 2025-03-07T15:11:47.510Z
+        lastAccessed: 2025-03-12T08:55:36.948Z
+        id: 771d62ea-c7dc-4493-adb9-e28a9b99ab81
+      - key: authorization
+        value: AQAAVLLXbp3nOgb0XsF3PHrhdV5H00_u2fkunFAmUHbRdjM3iM1nAHsAAAAYAQC73NoLW3pPDfVDUJzN9P7_AAAAJqydin4qCD0uHM-dHnIn3gPW1cjUQo-JbXGG7ffdxk7E0MN-6z_n70iO7BoNt7YD-lSyspaeBk-9olRrh-p2SfdRgfIsn6hdTzq3pX1DAlGHj2kqfGGfEqEPEmMawjf5c_4rKvSSRpyBDmPagSWmPhqroqZnJPaHfz06oqjXXjMLQNgx4EkUaLGYD2bP59sQ7ym7gQVw97YN894_7gTuovOxUJv2NZ5fY4R-bUyT9ZGyZPcM4WF-qzxCxbnvl-yQ2sEGmJf5R7wOG6W9CCfOgHsUjFsdsmaEbWL3npN3xVxm0l
+        domain: localhost
+        path: /
+        httpOnly: true
+        hostOnly: true
+        creation: 2025-03-09T11:07:18.281Z
+        lastAccessed: 2025-03-09T12:25:22.666Z
+        id: 916d4494-15d7-437e-9af6-c7db72f27a6b
+      - key: AUTH_SESSION_ID
+        value: ea795ebc-7432-4ed7-8b7f-9047593976d5.ab6fbcc63537
+        domain: localhost
+        path: /auth/realms/Jerome/
+        secure: true
+        httpOnly: true
+        extensions:
+          - Version=1
+        hostOnly: true
+        creation: 2025-03-09T11:07:18.282Z
+        lastAccessed: 2025-03-09T12:25:22.666Z
+        sameSite: none
+        id: 62255be8-c1b3-4a76-8af9-a27e357a847c
+      - key: AUTH_SESSION_ID_LEGACY
+        value: ea795ebc-7432-4ed7-8b7f-9047593976d5.ab6fbcc63537
+        domain: localhost
+        path: /auth/realms/Jerome/
+        secure: true
+        httpOnly: true
+        extensions:
+          - Version=1
+        hostOnly: true
+        creation: 2025-03-09T11:07:18.282Z
+        lastAccessed: 2025-03-09T12:25:22.666Z
+        id: 23ce8971-8eb1-4397-9780-3bd6da96753b
+      - key: KC_RESTART
+        value: eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJjYThiMDBjZS05YzJlLTQ2MWUtOWVkNC0zNmRmZjkxMjUxZjYifQ.eyJjaWQiOiJrb25nIiwicHR5Ijoib3BlbmlkLWNvbm5lY3QiLCJydXJpIjoiaHR0cDovL2xvY2FsaG9zdDo4MDAwL2h0dHBiaW4tb2lkYy9hbnl0aGluZyIsImFjdCI6IkFVVEhFTlRJQ0FURSIsIm5vdGVzIjp7InNjb3BlIjoib3BlbmlkIiwiaXNzIjoiaHR0cHM6Ly9zc28uYXBpbS5ldTo4NDQzL2F1dGgvcmVhbG1zL0plcm9tZSIsInJlc3BvbnNlX3R5cGUiOiJjb2RlIiwiY29kZV9jaGFsbGVuZ2VfbWV0aG9kIjoiUzI1NiIsInJlZGlyZWN0X3VyaSI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9odHRwYmluLW9pZGMvYW55dGhpbmciLCJzdGF0ZSI6IkpLS2J4R2daOVh3RndZMWVxRXpQeXhKVSIsIm5vbmNlIjoiOVJkZFlqV1ZvWHA2MXdfUjYweGFqTnBoIiwiY29kZV9jaGFsbGVuZ2UiOiJocDdxNjZwcVA1LU40eGJ3V3ZWMU9MTVpzZ1ZDZnl0NWlxTkFXcVU5Qm1FIiwicmVzcG9uc2VfbW9kZSI6InF1ZXJ5In19.fNFuGK8f174OMaUzjHD1QpuYxyI8Cy6YpKHXEBKlR64
+        domain: localhost
+        path: /auth/realms/Jerome/
+        secure: true
+        httpOnly: true
+        extensions:
+          - Version=1
+        hostOnly: true
+        creation: 2025-03-09T11:07:18.282Z
+        lastAccessed: 2025-03-09T12:25:22.666Z
+        id: 85f4926b-83aa-425e-971d-aeb45bc457bf
+    _type: cookie_jar
