@@ -243,6 +243,41 @@ Create a Route to provide the `/.well-known/openid-configuration` details of the
   - config.api_specification=put this spec: [externalRestApi.yaml](/externalRestApi/swagger.yaml)
   - config.include_base_path=`true`
   - Click on `Save`
+The mocked response of the `External REST API` is:
+```json
+{
+  "products":
+  [
+    {
+      "Kong Konnect":
+      { 
+        "version": 2024,
+        "saas": true
+      }
+    },
+    {
+      "Kong Gateway":
+      {
+        "version": 3.9,
+        "saas": false
+      }
+    }
+  ],
+  "offices":
+  {
+    "site":
+      [
+        "San Francisco (HQ)",
+        "Chicago",
+        "London",
+        "Bangalore",
+        "Singapore",
+        "Shanghai",
+        "Japan"
+      ]
+  }
+}
+```
 
 ### Configure the `light-oauth2` plugin for **Crafting** a new JWT on Token Exchange
 1) Create a Gateway Service
@@ -261,7 +296,7 @@ Create a Route to provide the `/.well-known/openid-configuration` details of the
   - config.auth_methods=`authorization_code`, `client_credentials`, `introspection`
 4) Add `light-oauth2` plugin to the Route with:
   - config.api_id_claim=`clientId`
-  - config.api_claims_to_copy=`offices` and `products`
+  - config.api_claims_to_copy=`<adapt the claims to your environment>` (example: `offices` and `products` related to the mocked API created above)
   - config.api_url=`<adapt the URL to your environment>` (example: `https://kong-gateway:8443/restExternalApi/anything` for the mocked API created above)
   - config.auth_domain=`mydomain`
   - config.iss=`<adapt the URL to your environment>` (example: https://kong-gateway:8443/auth/mydomain)
