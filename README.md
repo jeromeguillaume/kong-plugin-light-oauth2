@@ -31,7 +31,7 @@ Multiple domains can be used for providing segmentation of authorization and JWT
 |config.api_id_claim|clientId|The claim name to extract a value (from the source JWT) for calling `api_url` REST API by putting the value in `api_url_query_param`|
 |config.api_claims_to_copy|products|Array of JSON properties for extracting values from the `api_url` call and for injecting/enriching the JWT managed by the Light OAuth2 server|
 |config.api_url|https://domain.com/restApi|URL of the External REST API|
-|config.api_url_query_param|paramClientId|Name of the query parameter of `api_url` and the value comes from `api_id_claim`|
+|config.api_url_query_param|paramClientId|Name of the query parameter of `api_url`. The value comes from `api_id_claim`|
 config.auth_domain|mydomain|Domain name of the Light OAuth2 server|
 |config.expires_in|1800|Number of seconds for the `exp` (expiration) claim
 |config.iss|https://kong-gateway:8443/auth/mydomain|The `iss` (issuer) claim that identifies the Light OAuth2 server|
@@ -260,8 +260,8 @@ Create a Route to provide the `/.well-known/openid-configuration` details of the
   - config.issuer=`<adapt the URL to your IdP>` (example: https://sso.apim.eu:8443/auth/realms/Jerome/.well-known/openid-configuration)
   - config.auth_methods=`authorization_code`, `client_credentials`, `introspection`
 4) Add `light-oauth2` plugin to the Route with:
-  - config.api_id_claim=`idB2C`
-  - config.api_claims_to_copy=`listeReferenceSI` and `listeIdmydomainB2CRattachees`
+  - config.api_id_claim=`clientId`
+  - config.api_claims_to_copy=`offices` and `products`
   - config.api_url=`<adapt the URL to your environment>` (example: `https://kong-gateway:8443/external-rest-api` for the mocked API created above)
   - config.auth_domain=`mydomain`
   - config.iss=`<adapt the URL to your environment>` (example: https://kong-gateway:8443/auth/mydomain)
@@ -290,30 +290,39 @@ Create a Route to provide the `/.well-known/openid-configuration` details of the
   ```
   or
   ```shell
-  http --verify=no https://kong-gateway:8443/light-oauth2/access Authorization:'Bearer eyJraWQiOiJrb25nIiwiamt1IjoiaHR0cHM6Ly9rb25nLWdhdGV3YXk6ODQ0My9hdXRoL2VuZ2llL2p3a3MiLCJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXAiOiJCZWFyZXIiLCJzdWIiOiJjYzE2M2ZmNS1iZmMxLTRkNmYtYTFjMS02YjAzZTI5NWY2MmYiLCJhY3IiOiIxIiwiY2xpZW50SWQiOiJjb250YWN0QGtvbmdocS5jb20iLCJjbGllbnRIb3N0IjoiOTAuMy42Ni4yMjciLCJjbGllbnRBZGRyZXNzIjoiOTAuMy42Ni4yMjciLCJsaXN0ZVJlZmVyZW5jZVNJIjpbeyJhcHBsaWNhdGlvbiI6IiIsImVudGl0ZSI6Ik1GelVGb1lIOEpTNDJlNk1jQ05uIiwiaWRlbnRpZmlhbnRTSSI6IjBOQnZ3WnVkRDU0NzNDRCJ9XSwiYXpwIjoiY29udGFjdEBrb25naHEuY29tIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1qZXJvbWUiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwiaWF0IjoxNzQxODcxMTE5LCJpc3MiOiJodHRwczovL2tvbmctZ2F0ZXdheTo4NDQzL2F1dGgvZW5naWUiLCJleHAiOjE3NDE4NzExNDksInNjb3BlIjoib3BlbmlkIGVtYWlsIHByb2ZpbGUiLCJqdGkiOiJlYmYwYzI2OS1jZTQzLTQ0YzgtYTRmZS1jNzBlYWViOTZmMmMiLCJhdWQiOiJodHRwOi8vaHR0cGJpbi5hcGltLmV1L2FueXRoaW5nIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwibGlzdGVJZEVuZ2llQjJDUmF0dGFjaGVlcyI6W3siaWRFbmdpZUIyQ0ZpbHMiOiJZZFUyTUFPVHBIdFA5UGt3UzAiLCJkYXRlUmF0dGFjaGVtZW50IjoiMjAyNS0wMy0xM1QxMzowNToxOVoiLCJsaXN0ZVJlZmVyZW5jZVNJIjpbeyJhcHBsaWNhdGlvbiI6InVsTzhWRjJrIiwiZW50aXRlIjoiYWpvR0pvdmF2b1FaczAzUjRkVCIsImlkZW50aWZpYW50U0kiOiJKdUhvZkVoNW5CNU9qcmFUaWEifV19XSwicHJlZmVycmVkX3VzZXJuYW1lIjoic2VydmljZS1hY2NvdW50LWNvbnRhY3RAa29uZ2hxLmNvbSJ9.PG3TxIe2yp4FmizkwuPEMukRQAh76tovQhb7_RXNXKuPX4IxzVn6LLMBsZ4AvU--5xP-t-TzOEzQEfqzn5Edt3IPutbvul8YcHLn4IwQRKteP1Sncy0nwWGXpiruv2m5OczcJFb3rshKngRHD-wCyWzlsac75GGuf1E1G_nihR8mr5Hc4kgkAKpxk5Wgv0G8HJ1tiN9lXgq7iJpzzPV0lvXuVr6R8a9xYvV_TZrwNVvX_yp07uCra2pPxYTLaoJ-ZL5MUzlxgsyVVl8Dg23TSnrrYeRx513TVb3ZtN4uRDSXW5bKeHuo1xJCaMy_mgr-wtTCRSIezHTSWe642-cUZw'
+  http --verify=no https://kong-gateway:8443/light-oauth2/access Authorization:'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6ImtvbmciLCJqa3UiOiJodHRwczovL2tvbmctZ2F0ZXdheTo4NDQzL2F1dGgvbXlkb21haW4vandrcyJ9.eyJjbGllbnRJZCI6ImNvbnRhY3RAa29uZ2hxLmNvbSIsInByb2R1Y3RzIjpbeyJLb25nIEtvbm5lY3QiOnsidmVyc2lvbiI6MjAyNCwic2FhcyI6dHJ1ZX19LHsiS29uZyBHYXRld2F5Ijp7InZlcnNpb24iOjMuOSwic2FhcyI6ZmFsc2V9fV0sImFjciI6IjEiLCJleHAiOjE3NDE4OTExOTMsImNsaWVudEhvc3QiOiI5MC4zLjY2LjIyNyIsImF6cCI6ImNvbnRhY3RAa29uZ2hxLmNvbSIsInNjb3BlIjoib3BlbmlkIGVtYWlsIHByb2ZpbGUiLCJjbGllbnRBZGRyZXNzIjoiOTAuMy42Ni4yMjciLCJpc3MiOiJodHRwczovL2tvbmctZ2F0ZXdheTo4NDQzL2F1dGgvbXlkb21haW4iLCJhdWQiOiJodHRwOi8vaHR0cGJpbi5hcGltLmV1L2FueXRoaW5nIiwiaWF0IjoxNzQxODg5MzkzLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJkZWZhdWx0LXJvbGVzLWplcm9tZSIsInVtYV9hdXRob3JpemF0aW9uIl19LCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzZXJ2aWNlLWFjY291bnQtY29udGFjdEBrb25naHEuY29tIiwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInR5cCI6IkJlYXJlciIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwianRpIjoiYWY4MTQzMDgtZDljMC00OTJjLTllN2ItNWRhNGZlNjU1NjI5Iiwic3ViIjoiY2MxNjNmZjUtYmZjMS00ZDZmLWExYzEtNmIwM2UyOTVmNjJmIiwib2ZmaWNlcyI6eyJzaXRlIjpbIlNhbiBGcmFuY2lzY28gKEhRKSIsIkNoaWNhZ28iLCJMb25kb24iLCJCYW5nYWxvcmUiLCJTaW5nYXBvcmUiLCJTaGFuZ2hhaSIsIkphcGFuIl19fQ.T6BMX9Y8ljjenN5T64PsAIfC-aA6wUk-50Ht3abYe9Z0ulauek8vXy3AvKENMifGq45Pz1yQQh8UW94NlriEmK4NTIKuQ34PdA4JeecXuKnG1qnQs3zBCvimjjdz_Uegxxo2C2ZbaQQ94bZJ7UOw20b-yaX_VikDoN7_m4IbgltvM4x1jew3lLN25msYCaLbkm9s3m_2BBSDVhF81q9M57jYwg0z_wA_HqZKsOogUTEP2MyAGov5J8BM-0IT2dUjQ4NhYMvJE0CbdUaH0RGWwI5U8vYBiiuom3eUgVT5FwGuXWaSWJPpBsHeqvH7w5o5hWTDLfxGIjjITy-UxgspIA'
   ```
 - `Response`: expected value of `light-oauth2` plugin:
     * Base64 encoded:
     ```
-    eyJraWQiOiJrb25nIiwiamt1IjoiaHR0cHM6Ly9rb25nLWdhdGV3YXk6ODQ0My9hdXRoL2VuZ2llL2p3a3MiLCJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXAiOiJCZWFyZXIiLCJzdWIiOiJjYzE2M2ZmNS1iZmMxLTRkNmYtYTFjMS02YjAzZTI5NWY2MmYiLCJhY3IiOiIxIiwiY2xpZW50SWQiOiJjb250YWN0QGtvbmdocS5jb20iLCJjbGllbnRIb3N0IjoiOTAuMy42Ni4yMjciLCJjbGllbnRBZGRyZXNzIjoiOTAuMy42Ni4yMjciLCJsaXN0ZVJlZmVyZW5jZVNJIjpbeyJhcHBsaWNhdGlvbiI6IiIsImVudGl0ZSI6Ik1GelVGb1lIOEpTNDJlNk1jQ05uIiwiaWRlbnRpZmlhbnRTSSI6IjBOQnZ3WnVkRDU0NzNDRCJ9XSwiYXpwIjoiY29udGFjdEBrb25naHEuY29tIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1qZXJvbWUiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwiaWF0IjoxNzQxODcxMTE5LCJpc3MiOiJodHRwczovL2tvbmctZ2F0ZXdheTo4NDQzL2F1dGgvZW5naWUiLCJleHAiOjE3NDE4NzExNDksInNjb3BlIjoib3BlbmlkIGVtYWlsIHByb2ZpbGUiLCJqdGkiOiJlYmYwYzI2OS1jZTQzLTQ0YzgtYTRmZS1jNzBlYWViOTZmMmMiLCJhdWQiOiJodHRwOi8vaHR0cGJpbi5hcGltLmV1L2FueXRoaW5nIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwibGlzdGVJZEVuZ2llQjJDUmF0dGFjaGVlcyI6W3siaWRFbmdpZUIyQ0ZpbHMiOiJZZFUyTUFPVHBIdFA5UGt3UzAiLCJkYXRlUmF0dGFjaGVtZW50IjoiMjAyNS0wMy0xM1QxMzowNToxOVoiLCJsaXN0ZVJlZmVyZW5jZVNJIjpbeyJhcHBsaWNhdGlvbiI6InVsTzhWRjJrIiwiZW50aXRlIjoiYWpvR0pvdmF2b1FaczAzUjRkVCIsImlkZW50aWZpYW50U0kiOiJKdUhvZkVoNW5CNU9qcmFUaWEifV19XSwicHJlZmVycmVkX3VzZXJuYW1lIjoic2VydmljZS1hY2NvdW50LWNvbnRhY3RAa29uZ2hxLmNvbSJ9.PG3TxIe2yp4FmizkwuPEMukRQAh76tovQhb7_RXNXKuPX4IxzVn6LLMBsZ4AvU--5xP-t-TzOEzQEfqzn5Edt3IPutbvul8YcHLn4IwQRKteP1Sncy0nwWGXpiruv2m5OczcJFb3rshKngRHD-wCyWzlsac75GGuf1E1G_nihR8mr5Hc4kgkAKpxk5Wgv0G8HJ1tiN9lXgq7iJpzzPV0lvXuVr6R8a9xYvV_TZrwNVvX_yp07uCra2pPxYTLaoJ-ZL5MUzlxgsyVVl8Dg23TSnrrYeRx513TVb3ZtN4uRDSXW5bKeHuo1xJCaMy_mgr-wtTCRSIezHTSWe642-cUZw
+    eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6ImtvbmciLCJqa3UiOiJodHRwczovL2tvbmctZ2F0ZXdheTo4NDQzL2F1dGgvbXlkb21haW4vandrcyJ9.eyJjbGllbnRJZCI6ImNvbnRhY3RAa29uZ2hxLmNvbSIsInByb2R1Y3RzIjpbeyJLb25nIEtvbm5lY3QiOnsidmVyc2lvbiI6MjAyNCwic2FhcyI6dHJ1ZX19LHsiS29uZyBHYXRld2F5Ijp7InZlcnNpb24iOjMuOSwic2FhcyI6ZmFsc2V9fV0sImFjciI6IjEiLCJleHAiOjE3NDE4OTExOTMsImNsaWVudEhvc3QiOiI5MC4zLjY2LjIyNyIsImF6cCI6ImNvbnRhY3RAa29uZ2hxLmNvbSIsInNjb3BlIjoib3BlbmlkIGVtYWlsIHByb2ZpbGUiLCJjbGllbnRBZGRyZXNzIjoiOTAuMy42Ni4yMjciLCJpc3MiOiJodHRwczovL2tvbmctZ2F0ZXdheTo4NDQzL2F1dGgvbXlkb21haW4iLCJhdWQiOiJodHRwOi8vaHR0cGJpbi5hcGltLmV1L2FueXRoaW5nIiwiaWF0IjoxNzQxODg5MzkzLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJkZWZhdWx0LXJvbGVzLWplcm9tZSIsInVtYV9hdXRob3JpemF0aW9uIl19LCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzZXJ2aWNlLWFjY291bnQtY29udGFjdEBrb25naHEuY29tIiwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInR5cCI6IkJlYXJlciIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwianRpIjoiYWY4MTQzMDgtZDljMC00OTJjLTllN2ItNWRhNGZlNjU1NjI5Iiwic3ViIjoiY2MxNjNmZjUtYmZjMS00ZDZmLWExYzEtNmIwM2UyOTVmNjJmIiwib2ZmaWNlcyI6eyJzaXRlIjpbIlNhbiBGcmFuY2lzY28gKEhRKSIsIkNoaWNhZ28iLCJMb25kb24iLCJCYW5nYWxvcmUiLCJTaW5nYXBvcmUiLCJTaGFuZ2hhaSIsIkphcGFuIl19fQ.T6BMX9Y8ljjenN5T64PsAIfC-aA6wUk-50Ht3abYe9Z0ulauek8vXy3AvKENMifGq45Pz1yQQh8UW94NlriEmK4NTIKuQ34PdA4JeecXuKnG1qnQs3zBCvimjjdz_Uegxxo2C2ZbaQQ94bZJ7UOw20b-yaX_VikDoN7_m4IbgltvM4x1jew3lLN25msYCaLbkm9s3m_2BBSDVhF81q9M57jYwg0z_wA_HqZKsOogUTEP2MyAGov5J8BM-0IT2dUjQ4NhYMvJE0CbdUaH0RGWwI5U8vYBiiuom3eUgVT5FwGuXWaSWJPpBsHeqvH7w5o5hWTDLfxGIjjITy-UxgspIA
     ```
-    * JSON decoded, **pay attention to the new claims added for enrichment `listeReferenceSI` and  `listeIdmydomainB2CRattachees`**:
+    * JSON decoded, **pay attention to the new claims added for enrichment `offices` and  `products`**:
     ```json
     {
-      "typ": "Bearer",
-      "sub": "cc163ff5-bfc1-4d6f-a1c1-6b03e295f62f",
-      "acr": "1",
+      "exp": 1741891152,
       "clientId": "contact@konghq.com",
-      "clientHost": "90.3.66.227",
-      "clientAddress": "90.3.66.227",
-      "listeReferenceSI": [
+      "products": [
         {
-          "application": "",
-          "entite": "MFzUFoYH8JS42e6McCNn",
-          "identifiantSI": "0NBvwZudD5473CD"
+          "Kong Konnect": {
+            "saas": true,
+            "version": 2024
+          }
+        },
+        {
+          "Kong Gateway": {
+            "saas": false,
+            "version": 3.9
+          }
         }
       ],
-      "azp": "contact@konghq.com",
+      "email_verified": false,
+      "clientHost": "90.3.66.227",
+      "clientAddress": "90.3.66.227",
+      "aud": "http://httpbin.apim.eu/anything",
+      "typ": "Bearer",
+      "iat": 1741889352,
+      "sub": "cc163ff5-bfc1-4d6f-a1c1-6b03e295f62f",
       "realm_access": {
         "roles": [
           "offline_access",
@@ -321,13 +330,7 @@ Create a Route to provide the `/.well-known/openid-configuration` details of the
           "uma_authorization"
         ]
       },
-      "iat": 1741871119,
-      "iss": "https://kong-gateway:8443/auth/mydomain",
-      "exp": 1741871149,
-      "scope": "openid email profile",
-      "jti": "ebf0c269-ce43-44c8-a4fe-c70eaeb96f2c",
-      "aud": "http://httpbin.apim.eu/anything",
-      "email_verified": false,
+      "jti": "c10247c4-2fef-470e-bbb7-e2dcedfddf2f",
       "resource_access": {
         "account": {
           "roles": [
@@ -337,20 +340,22 @@ Create a Route to provide the `/.well-known/openid-configuration` details of the
           ]
         }
       },
-      "listeIdmydomainB2CRattachees": [
-        {
-          "idmydomainB2CFils": "YdU2MAOTpHtP9PkwS0",
-          "dateRattachement": "2025-03-13T13:05:19Z",
-          "listeReferenceSI": [
-            {
-              "application": "ulO8VF2k",
-              "entite": "ajoGJovavoQZs03R4dT",
-              "identifiantSI": "JuHofEh5nB5OjraTia"
-            }
-          ]
-        }
-      ],
-      "preferred_username": "service-account-contact@konghq.com"
+      "offices": {
+        "site": [
+          "San Francisco (HQ)",
+          "Chicago",
+          "London",
+          "Bangalore",
+          "Singapore",
+          "Shanghai",
+          "Japan"
+        ]
+      },
+      "acr": "1",
+      "preferred_username": "service-account-contact@konghq.com",
+      "iss": "https://kong-gateway:8443/auth/mydomain",
+      "azp": "contact@konghq.com",
+      "scope": "openid email profile"
     }
     ```
 
@@ -361,7 +366,7 @@ Create a Route to provide the `/.well-known/openid-configuration` details of the
 http --verify=no --form -a 'admin@mydomain.com:mydomain!2025' \
 POST https://kong-gateway:8443/auth/mydomain/introspect \
 token_type_hint='access_token' \
-token='eyJraWQiOiJrb25nIiwiamt1IjoiaHR0cHM6Ly9rb25nLWdhdGV3YXk6ODQ0My9hdXRoL2VuZ2llL2p3a3MiLCJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzZXJ2aWNlLWFjY291bnQtY29udGFjdEBrb25naHEuY29tIiwidHlwIjoiQmVhcmVyIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1qZXJvbWUiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwic3ViIjoiY2MxNjNmZjUtYmZjMS00ZDZmLWExYzEtNmIwM2UyOTVmNjJmIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJhY3IiOiIxIiwiY2xpZW50SWQiOiJjb250YWN0QGtvbmdocS5jb20iLCJjbGllbnRIb3N0IjoiOTAuMy42Ni4yMjciLCJsaXN0ZVJlZmVyZW5jZVNJIjpbeyJhcHBsaWNhdGlvbiI6IkZvdnhTIiwiZW50aXRlIjoiSWZWNiIsImlkZW50aWZpYW50U0kiOiJBMFdpMDk5MjFMIn1dLCJhenAiOiJjb250YWN0QGtvbmdocS5jb20iLCJjbGllbnRBZGRyZXNzIjoiOTAuMy42Ni4yMjciLCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwiaXNzIjoiaHR0cHM6Ly9rb25nLWdhdGV3YXk6ODQ0My9hdXRoL2VuZ2llIiwiZXhwIjoxNzQxODc2NTI3LCJzY29wZSI6Im9wZW5pZCBlbWFpbCBwcm9maWxlIiwianRpIjoiMDhiN2ZhNTItNmY2My00OTU4LTljNTYtM2RmMGM5YWY0NzE5IiwiYXVkIjoiaHR0cDovL2h0dHBiaW4uYXBpbS5ldS9hbnl0aGluZyIsImxpc3RlSWRFbmdpZUIyQ1JhdHRhY2hlZXMiOlt7ImlkRW5naWVCMkNGaWxzIjoiSWdoeVltVzQiLCJkYXRlUmF0dGFjaGVtZW50IjoiMjAyNS0wMy0xM1QxNDowNToyN1oiLCJsaXN0ZVJlZmVyZW5jZVNJIjpbeyJhcHBsaWNhdGlvbiI6InVYMiIsImVudGl0ZSI6InBSakM1ZnZiIiwiaWRlbnRpZmlhbnRTSSI6IndBc1dFUnBlV2s0In1dfV0sImlhdCI6MTc0MTg3NDcyN30.f5yATYEj3tzuIBu8GpuJ8o_hHKq2YamTAEPMv0bRt0C3JbOGn8LVnCz_VxIvP5RiFqokPzGOlztM8BhhfvxFpgw9o6RLGtyIDEjB0Cn99QbLgPnHk_pOwWGA6JApghBObgG1JmmWTMIlIpe-84OWQAiQR3-sNEHkizuk-7QdNtEZZUmLqVXX2zH0Qqpo3iHzA7_ajSYsRrvB5562gKKM1t21JdqW5sWEpqq-ujt176rhuEbHt5x5vOxBQapxV0-1qiYmJ0glGU8Fri54y_sa4k8eT2WIu2HYvDlMJ_f6M-Yddc_iu7TBXgIaBwH72MGQUhtfRMY1A_bH3ww9IkXelg'
+token='eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6ImtvbmciLCJqa3UiOiJodHRwczovL2tvbmctZ2F0ZXdheTo4NDQzL2F1dGgvbXlkb21haW4vandrcyJ9.eyJjbGllbnRJZCI6ImNvbnRhY3RAa29uZ2hxLmNvbSIsInByb2R1Y3RzIjpbeyJLb25nIEtvbm5lY3QiOnsidmVyc2lvbiI6MjAyNCwic2FhcyI6dHJ1ZX19LHsiS29uZyBHYXRld2F5Ijp7InZlcnNpb24iOjMuOSwic2FhcyI6ZmFsc2V9fV0sImFjciI6IjEiLCJleHAiOjE3NDE4OTExOTMsImNsaWVudEhvc3QiOiI5MC4zLjY2LjIyNyIsImF6cCI6ImNvbnRhY3RAa29uZ2hxLmNvbSIsInNjb3BlIjoib3BlbmlkIGVtYWlsIHByb2ZpbGUiLCJjbGllbnRBZGRyZXNzIjoiOTAuMy42Ni4yMjciLCJpc3MiOiJodHRwczovL2tvbmctZ2F0ZXdheTo4NDQzL2F1dGgvbXlkb21haW4iLCJhdWQiOiJodHRwOi8vaHR0cGJpbi5hcGltLmV1L2FueXRoaW5nIiwiaWF0IjoxNzQxODg5MzkzLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJkZWZhdWx0LXJvbGVzLWplcm9tZSIsInVtYV9hdXRob3JpemF0aW9uIl19LCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzZXJ2aWNlLWFjY291bnQtY29udGFjdEBrb25naHEuY29tIiwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInR5cCI6IkJlYXJlciIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwianRpIjoiYWY4MTQzMDgtZDljMC00OTJjLTllN2ItNWRhNGZlNjU1NjI5Iiwic3ViIjoiY2MxNjNmZjUtYmZjMS00ZDZmLWExYzEtNmIwM2UyOTVmNjJmIiwib2ZmaWNlcyI6eyJzaXRlIjpbIlNhbiBGcmFuY2lzY28gKEhRKSIsIkNoaWNhZ28iLCJMb25kb24iLCJCYW5nYWxvcmUiLCJTaW5nYXBvcmUiLCJTaGFuZ2hhaSIsIkphcGFuIl19fQ.T6BMX9Y8ljjenN5T64PsAIfC-aA6wUk-50Ht3abYe9Z0ulauek8vXy3AvKENMifGq45Pz1yQQh8UW94NlriEmK4NTIKuQ34PdA4JeecXuKnG1qnQs3zBCvimjjdz_Uegxxo2C2ZbaQQ94bZJ7UOw20b-yaX_VikDoN7_m4IbgltvM4x1jew3lLN25msYCaLbkm9s3m_2BBSDVhF81q9M57jYwg0z_wA_HqZKsOogUTEP2MyAGov5J8BM-0IT2dUjQ4NhYMvJE0CbdUaH0RGWwI5U8vYBiiuom3eUgVT5FwGuXWaSWJPpBsHeqvH7w5o5hWTDLfxGIjjITy-UxgspIA'
 ```
 - Ok `Response`: if JWT is valid (and not expired) the JSON of JWT is returned with an extra claim **`"active": true`**
 ```shell
@@ -401,7 +406,7 @@ HTTP/1.1 401 Unauthorized
 http --verify=no --form -a 'admin@mydomain.com:mydomain!2025' \
 POST https://kong-gateway:8443/auth/mydomain/revoke \
 token_type_hint='access_token' \
-token='eyJraWQiOiJrb25nIiwiamt1IjoiaHR0cHM6Ly9rb25nLWdhdGV3YXk6ODQ0My9hdXRoL2VuZ2llL2p3a3MiLCJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzZXJ2aWNlLWFjY291bnQtY29udGFjdEBrb25naHEuY29tIiwidHlwIjoiQmVhcmVyIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwiZGVmYXVsdC1yb2xlcy1qZXJvbWUiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwic3ViIjoiY2MxNjNmZjUtYmZjMS00ZDZmLWExYzEtNmIwM2UyOTVmNjJmIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJhY3IiOiIxIiwiY2xpZW50SWQiOiJjb250YWN0QGtvbmdocS5jb20iLCJjbGllbnRIb3N0IjoiOTAuMy42Ni4yMjciLCJsaXN0ZVJlZmVyZW5jZVNJIjpbeyJhcHBsaWNhdGlvbiI6IkZvdnhTIiwiZW50aXRlIjoiSWZWNiIsImlkZW50aWZpYW50U0kiOiJBMFdpMDk5MjFMIn1dLCJhenAiOiJjb250YWN0QGtvbmdocS5jb20iLCJjbGllbnRBZGRyZXNzIjoiOTAuMy42Ni4yMjciLCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwiaXNzIjoiaHR0cHM6Ly9rb25nLWdhdGV3YXk6ODQ0My9hdXRoL2VuZ2llIiwiZXhwIjoxNzQxODc2NTI3LCJzY29wZSI6Im9wZW5pZCBlbWFpbCBwcm9maWxlIiwianRpIjoiMDhiN2ZhNTItNmY2My00OTU4LTljNTYtM2RmMGM5YWY0NzE5IiwiYXVkIjoiaHR0cDovL2h0dHBiaW4uYXBpbS5ldS9hbnl0aGluZyIsImxpc3RlSWRFbmdpZUIyQ1JhdHRhY2hlZXMiOlt7ImlkRW5naWVCMkNGaWxzIjoiSWdoeVltVzQiLCJkYXRlUmF0dGFjaGVtZW50IjoiMjAyNS0wMy0xM1QxNDowNToyN1oiLCJsaXN0ZVJlZmVyZW5jZVNJIjpbeyJhcHBsaWNhdGlvbiI6InVYMiIsImVudGl0ZSI6InBSakM1ZnZiIiwiaWRlbnRpZmlhbnRTSSI6IndBc1dFUnBlV2s0In1dfV0sImlhdCI6MTc0MTg3NDcyN30.f5yATYEj3tzuIBu8GpuJ8o_hHKq2YamTAEPMv0bRt0C3JbOGn8LVnCz_VxIvP5RiFqokPzGOlztM8BhhfvxFpgw9o6RLGtyIDEjB0Cn99QbLgPnHk_pOwWGA6JApghBObgG1JmmWTMIlIpe-84OWQAiQR3-sNEHkizuk-7QdNtEZZUmLqVXX2zH0Qqpo3iHzA7_ajSYsRrvB5562gKKM1t21JdqW5sWEpqq-ujt176rhuEbHt5x5vOxBQapxV0-1qiYmJ0glGU8Fri54y_sa4k8eT2WIu2HYvDlMJ_f6M-Yddc_iu7TBXgIaBwH72MGQUhtfRMY1A_bH3ww9IkXelg'
+token='eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6ImtvbmciLCJqa3UiOiJodHRwczovL2tvbmctZ2F0ZXdheTo4NDQzL2F1dGgvbXlkb21haW4vandrcyJ9.eyJjbGllbnRJZCI6ImNvbnRhY3RAa29uZ2hxLmNvbSIsInByb2R1Y3RzIjpbeyJLb25nIEtvbm5lY3QiOnsidmVyc2lvbiI6MjAyNCwic2FhcyI6dHJ1ZX19LHsiS29uZyBHYXRld2F5Ijp7InZlcnNpb24iOjMuOSwic2FhcyI6ZmFsc2V9fV0sImFjciI6IjEiLCJleHAiOjE3NDE4OTExOTMsImNsaWVudEhvc3QiOiI5MC4zLjY2LjIyNyIsImF6cCI6ImNvbnRhY3RAa29uZ2hxLmNvbSIsInNjb3BlIjoib3BlbmlkIGVtYWlsIHByb2ZpbGUiLCJjbGllbnRBZGRyZXNzIjoiOTAuMy42Ni4yMjciLCJpc3MiOiJodHRwczovL2tvbmctZ2F0ZXdheTo4NDQzL2F1dGgvbXlkb21haW4iLCJhdWQiOiJodHRwOi8vaHR0cGJpbi5hcGltLmV1L2FueXRoaW5nIiwiaWF0IjoxNzQxODg5MzkzLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJkZWZhdWx0LXJvbGVzLWplcm9tZSIsInVtYV9hdXRob3JpemF0aW9uIl19LCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzZXJ2aWNlLWFjY291bnQtY29udGFjdEBrb25naHEuY29tIiwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInR5cCI6IkJlYXJlciIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwianRpIjoiYWY4MTQzMDgtZDljMC00OTJjLTllN2ItNWRhNGZlNjU1NjI5Iiwic3ViIjoiY2MxNjNmZjUtYmZjMS00ZDZmLWExYzEtNmIwM2UyOTVmNjJmIiwib2ZmaWNlcyI6eyJzaXRlIjpbIlNhbiBGcmFuY2lzY28gKEhRKSIsIkNoaWNhZ28iLCJMb25kb24iLCJCYW5nYWxvcmUiLCJTaW5nYXBvcmUiLCJTaGFuZ2hhaSIsIkphcGFuIl19fQ.T6BMX9Y8ljjenN5T64PsAIfC-aA6wUk-50Ht3abYe9Z0ulauek8vXy3AvKENMifGq45Pz1yQQh8UW94NlriEmK4NTIKuQ34PdA4JeecXuKnG1qnQs3zBCvimjjdz_Uegxxo2C2ZbaQQ94bZJ7UOw20b-yaX_VikDoN7_m4IbgltvM4x1jew3lLN25msYCaLbkm9s3m_2BBSDVhF81q9M57jYwg0z_wA_HqZKsOogUTEP2MyAGov5J8BM-0IT2dUjQ4NhYMvJE0CbdUaH0RGWwI5U8vYBiiuom3eUgVT5FwGuXWaSWJPpBsHeqvH7w5o5hWTDLfxGIjjITy-UxgspIA'
 ```
 - `Response`: Revoking a token that is invalid, expired, or previously revoked results in a 200 OK status code to avoid disclosing any sensitive information
 ```shell
