@@ -5,7 +5,7 @@ The plugin offers a Light OAuth2 Authorization Server enabling following capabil
     - The tokens are stored in a `ngx.shared` dictionary. Using Redis storage is essential to have a suitable solution running on multiple DataPlane nodes
 3) Token Exchange:
     - Craft a JWT managed by the Light OAuth2 server by copying the input Bearer Authorization JWT
-    - Call an `external-rest-api` for enrichment of the JWT managed by the Light OAuth2 server
+    - Call an External REST API for enrichment of the JWT managed by the Light OAuth2 server
     - Load the private JWK from the plugin's configuration and convert it into a PEM format
     - Sign the JWT with the PEM string for building a JWS
     - Add the JWT managed by the Light OAuth2 server to an HTTP Request Header backend API
@@ -72,7 +72,7 @@ light-oauth2.payload.jti = "<uuid>" -- Generation of a 'Universally unique ident
 -- The `clientId` query parameter is got from the JWT claim
 local res, err = httpc:request_uri(plugin_conf.api_url, ...)
 if not err then
-  -- Add claims retrieved by 'external-rest-api' for JWT enrichment
+  -- Add claims retrieved by the External REST API for JWT enrichment
   light-oauth2.payload.api_claims_to_copy = resp(api_claims_to_copy)
 else
   -- The Consumer's request is blocked
@@ -262,7 +262,7 @@ Create a Route to provide the `/.well-known/openid-configuration` details of the
 4) Add `light-oauth2` plugin to the Route with:
   - config.api_id_claim=`clientId`
   - config.api_claims_to_copy=`offices` and `products`
-  - config.api_url=`<adapt the URL to your environment>` (example: `https://kong-gateway:8443/external-rest-api` for the mocked API created above)
+  - config.api_url=`<adapt the URL to your environment>` (example: `https://kong-gateway:8443/restExternalApi/anything` for the mocked API created above)
   - config.auth_domain=`mydomain`
   - config.iss=`<adapt the URL to your environment>` (example: https://kong-gateway:8443/auth/mydomain)
   - config.jku=`<adapt the URL to your environment>` (example: https://kong-gateway:8443/auth/mydomain/jwks)
