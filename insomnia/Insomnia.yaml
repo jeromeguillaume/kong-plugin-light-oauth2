@@ -1,14 +1,14 @@
 _type: export
 __export_format: 4
-__export_date: 2025-03-13T15:01:42.887Z
+__export_date: 2025-03-13T18:46:18.627Z
 __export_source: insomnia.desktop.app:v10.2.0
 resources:
-  - _id: req_9ba3756b39744407b853628c7191c2a4
-    parentId: fld_0e391af5b3dc4d26bb81b11c69ec69cb
-    modified: 1741877528237
+  - _id: req_fdc2f7e9a3844bcba76bb97180514113
+    parentId: fld_d781e16128eb4ca3906f99703992b700
+    modified: 1741890198471
     created: 1741776092740
     url: http://{{ _.host }}/light-oauth2/login/anything
-    name: /light-oauth2/login (client1)
+    name: /light-oauth2/login
     description: ""
     method: GET
     body: {}
@@ -32,8 +32,8 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: fld_0e391af5b3dc4d26bb81b11c69ec69cb
-    parentId: wrk_1d18b66e322b4a4ebe685737a32a8324
+  - _id: fld_d781e16128eb4ca3906f99703992b700
+    parentId: wrk_69e138e1f5cf411b92da24fb8a166b5f
     modified: 1741877159257
     created: 1741776092743
     name: Domain API
@@ -43,17 +43,17 @@ resources:
     metaSortKey: -1741127119646.5
     environmentType: kv
     _type: request_group
-  - _id: wrk_1d18b66e322b4a4ebe685737a32a8324
+  - _id: wrk_69e138e1f5cf411b92da24fb8a166b5f
     parentId: null
-    modified: 1741877266957
-    created: 1741877084590
+    modified: 1741887589893
+    created: 1741887589893
     name: Plugin Light OAuth2
     description: ""
     scope: collection
     _type: workspace
-  - _id: req_305502759e4d4376b5c514b55c913523
-    parentId: fld_0e391af5b3dc4d26bb81b11c69ec69cb
-    modified: 1741878020058
+  - _id: req_cddb6951a0144bd59ce8cee03971cc57
+    parentId: fld_d781e16128eb4ca3906f99703992b700
+    modified: 1741889432494
     created: 1741776092740
     url: http://{{ _.host }}/light-oauth2/access/anything
     name: /light-oauth2/access
@@ -66,7 +66,7 @@ resources:
         value: insomnia/10.2.0
     authentication:
       type: bearer
-      token: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImprdSI6Imh0dHBzOi8va29uZy1nYXRld2F5Ojg0NDMvYXV0aC9lbmdpZS9qd2tzIiwia2lkIjoia29uZyJ9.eyJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJkZWZhdWx0LXJvbGVzLWplcm9tZSIsInVtYV9hdXRob3JpemF0aW9uIl19LCJleHAiOjE3NDE4Nzk4MTEsImF6cCI6ImNvbnRhY3RAa29uZ2hxLmNvbSIsInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJpc3MiOiJodHRwczovL2tvbmctZ2F0ZXdheTo4NDQzL2F1dGgvZW5naWUiLCJhdWQiOiJodHRwOi8vaHR0cGJpbi5hcGltLmV1L2FueXRoaW5nIiwiaWF0IjoxNzQxODc4MDExLCJ0eXAiOiJCZWFyZXIiLCJzdWIiOiJjYzE2M2ZmNS1iZmMxLTRkNmYtYTFjMS02YjAzZTI5NWY2MmYiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImFjciI6IjEiLCJjbGllbnRIb3N0IjoiOTAuMy42Ni4yMjciLCJjbGllbnRBZGRyZXNzIjoiOTAuMy42Ni4yMjciLCJqdGkiOiIzZmRmOWNlYS1kZTEyLTRhMGQtOWNiYS04OTA1MjExMWZmY2MiLCJzY29wZSI6Im9wZW5pZCBlbWFpbCBwcm9maWxlIiwibGlzdGVSZWZlcmVuY2VTSSI6W3siaWRlbnRpZmlhbnRTSSI6IlB0d3FJbk9FIiwiZW50aXRlIjoiVGJZS1Fsa3ciLCJhcHBsaWNhdGlvbiI6IlA0T054WDFHOGZhZkk2b1BmQiJ9XSwibGlzdGVJZEVuZ2llQjJDUmF0dGFjaGVlcyI6W3siaWRFbmdpZUIyQ0ZpbHMiOiJrRXZyVVJ6IiwiZGF0ZVJhdHRhY2hlbWVudCI6IjIwMjUtMDMtMTNUMTU6MDA6MTFaIiwibGlzdGVSZWZlcmVuY2VTSSI6W3siaWRlbnRpZmlhbnRTSSI6IkUiLCJlbnRpdGUiOiJxNGZrVXpVQkE5U1oiLCJhcHBsaWNhdGlvbiI6IiJ9XX1dLCJjbGllbnRJZCI6ImNvbnRhY3RAa29uZ2hxLmNvbSIsInByZWZlcnJlZF91c2VybmFtZSI6InNlcnZpY2UtYWNjb3VudC1jb250YWN0QGtvbmdocS5jb20ifQ.fNhYp_gPPWhW30q_8uvHRSxNpwwAmEgHa6GV1d1fPnhcwpvaydbYvvsuuX_lQOHAKX9atBuHN39vMxOv4Peg_8_R-KxOtEK5-2HmbxfhhnFjR0QqECM-Zqd1a_7EyuVEh2CNTJFHIfkRPdUKdBlSFrK6uENxBruvnsINz5FRUcIpY-QEeCqY82VQbtFDGwT0tI97J-3gODxOxp2qrYbsHYSWZAvB0qwXbx_Ht2fJLgllsCE7XO6X795pzRoHya6QOOKd0JWDUDWi5AgpxiT0wPF0hFvxmoifAcdfRIDkqYcReTfsyniCjWncvKoOwnMAa1_HUwVPvqAgkzldYP8A-g
+      token: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6ImtvbmciLCJqa3UiOiJodHRwczovL2tvbmctZ2F0ZXdheTo4NDQzL2F1dGgvbXlkb21haW4vandrcyJ9.eyJjbGllbnRJZCI6ImNvbnRhY3RAa29uZ2hxLmNvbSIsInByb2R1Y3RzIjpbeyJLb25nIEtvbm5lY3QiOnsidmVyc2lvbiI6MjAyNCwic2FhcyI6dHJ1ZX19LHsiS29uZyBHYXRld2F5Ijp7InZlcnNpb24iOjMuOSwic2FhcyI6ZmFsc2V9fV0sImFjciI6IjEiLCJleHAiOjE3NDE4OTExOTMsImNsaWVudEhvc3QiOiI5MC4zLjY2LjIyNyIsImF6cCI6ImNvbnRhY3RAa29uZ2hxLmNvbSIsInNjb3BlIjoib3BlbmlkIGVtYWlsIHByb2ZpbGUiLCJjbGllbnRBZGRyZXNzIjoiOTAuMy42Ni4yMjciLCJpc3MiOiJodHRwczovL2tvbmctZ2F0ZXdheTo4NDQzL2F1dGgvbXlkb21haW4iLCJhdWQiOiJodHRwOi8vaHR0cGJpbi5hcGltLmV1L2FueXRoaW5nIiwiaWF0IjoxNzQxODg5MzkzLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJkZWZhdWx0LXJvbGVzLWplcm9tZSIsInVtYV9hdXRob3JpemF0aW9uIl19LCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzZXJ2aWNlLWFjY291bnQtY29udGFjdEBrb25naHEuY29tIiwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInR5cCI6IkJlYXJlciIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwianRpIjoiYWY4MTQzMDgtZDljMC00OTJjLTllN2ItNWRhNGZlNjU1NjI5Iiwic3ViIjoiY2MxNjNmZjUtYmZjMS00ZDZmLWExYzEtNmIwM2UyOTVmNjJmIiwib2ZmaWNlcyI6eyJzaXRlIjpbIlNhbiBGcmFuY2lzY28gKEhRKSIsIkNoaWNhZ28iLCJMb25kb24iLCJCYW5nYWxvcmUiLCJTaW5nYXBvcmUiLCJTaGFuZ2hhaSIsIkphcGFuIl19fQ.T6BMX9Y8ljjenN5T64PsAIfC-aA6wUk-50Ht3abYe9Z0ulauek8vXy3AvKENMifGq45Pz1yQQh8UW94NlriEmK4NTIKuQ34PdA4JeecXuKnG1qnQs3zBCvimjjdz_Uegxxo2C2ZbaQQ94bZJ7UOw20b-yaX_VikDoN7_m4IbgltvM4x1jew3lLN25msYCaLbkm9s3m_2BBSDVhF81q9M57jYwg0z_wA_HqZKsOogUTEP2MyAGov5J8BM-0IT2dUjQ4NhYMvJE0CbdUaH0RGWwI5U8vYBiiuom3eUgVT5FwGuXWaSWJPpBsHeqvH7w5o5hWTDLfxGIjjITy-UxgspIA
       disabled: false
     metaSortKey: -1741247268429
     isPrivate: false
@@ -78,8 +78,8 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: req_8ac4dc18d64c477b82a011f7ae86fec2
-    parentId: fld_0e391af5b3dc4d26bb81b11c69ec69cb
+  - _id: req_340be97326ec4cec89700470fd021732
+    parentId: fld_d781e16128eb4ca3906f99703992b700
     modified: 1741877227555
     created: 1741776092744
     url: http://{{ _.host }}/external-rest-api
@@ -107,8 +107,8 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: req_0f7bd5479134416f9f7f9434031e5384
-    parentId: fld_a153e0e9278049c4b53424f283f0bc94
+  - _id: req_800b3c1f6b1944eb9f3818ff131a3a17
+    parentId: fld_e6207df556a6490382afc1aa64a0467b
     modified: 1741877563156
     created: 1741776161144
     url: http://{{ _.host }}/auth/mydomain/.well-known/openid-configuration
@@ -137,20 +137,20 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: fld_a153e0e9278049c4b53424f283f0bc94
-    parentId: wrk_1d18b66e322b4a4ebe685737a32a8324
-    modified: 1741877285623
+  - _id: fld_e6207df556a6490382afc1aa64a0467b
+    parentId: wrk_69e138e1f5cf411b92da24fb8a166b5f
+    modified: 1741890657807
     created: 1741777906200
     name: IdP Endpoints
     description: ""
     environment: {}
     environmentPropertyOrder: null
-    metaSortKey: -1741127119546.5
+    metaSortKey: -1741127119621.5
     environmentType: kv
     _type: request_group
-  - _id: req_8ea920acbaf94bce8fade488a098249c
-    parentId: fld_a153e0e9278049c4b53424f283f0bc94
-    modified: 1741878032189
+  - _id: req_22478703184242f0992eb02485e5d5db
+    parentId: fld_e6207df556a6490382afc1aa64a0467b
+    modified: 1741889440487
     created: 1741776092738
     url: http://{{ _.host }}/auth/mydomain/introspect
     name: /auth/mydomain/introspect (admin)
@@ -166,7 +166,7 @@ resources:
           disabled: false
         - id: pair_b5e6e92e72b3409cbea8f67c98281fa6
           name: token
-          value: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImprdSI6Imh0dHBzOi8va29uZy1nYXRld2F5Ojg0NDMvYXV0aC9lbmdpZS9qd2tzIiwia2lkIjoia29uZyJ9.eyJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJkZWZhdWx0LXJvbGVzLWplcm9tZSIsInVtYV9hdXRob3JpemF0aW9uIl19LCJleHAiOjE3NDE4Nzk4MTEsImF6cCI6ImNvbnRhY3RAa29uZ2hxLmNvbSIsInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJpc3MiOiJodHRwczovL2tvbmctZ2F0ZXdheTo4NDQzL2F1dGgvZW5naWUiLCJhdWQiOiJodHRwOi8vaHR0cGJpbi5hcGltLmV1L2FueXRoaW5nIiwiaWF0IjoxNzQxODc4MDExLCJ0eXAiOiJCZWFyZXIiLCJzdWIiOiJjYzE2M2ZmNS1iZmMxLTRkNmYtYTFjMS02YjAzZTI5NWY2MmYiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImFjciI6IjEiLCJjbGllbnRIb3N0IjoiOTAuMy42Ni4yMjciLCJjbGllbnRBZGRyZXNzIjoiOTAuMy42Ni4yMjciLCJqdGkiOiIzZmRmOWNlYS1kZTEyLTRhMGQtOWNiYS04OTA1MjExMWZmY2MiLCJzY29wZSI6Im9wZW5pZCBlbWFpbCBwcm9maWxlIiwibGlzdGVSZWZlcmVuY2VTSSI6W3siaWRlbnRpZmlhbnRTSSI6IlB0d3FJbk9FIiwiZW50aXRlIjoiVGJZS1Fsa3ciLCJhcHBsaWNhdGlvbiI6IlA0T054WDFHOGZhZkk2b1BmQiJ9XSwibGlzdGVJZEVuZ2llQjJDUmF0dGFjaGVlcyI6W3siaWRFbmdpZUIyQ0ZpbHMiOiJrRXZyVVJ6IiwiZGF0ZVJhdHRhY2hlbWVudCI6IjIwMjUtMDMtMTNUMTU6MDA6MTFaIiwibGlzdGVSZWZlcmVuY2VTSSI6W3siaWRlbnRpZmlhbnRTSSI6IkUiLCJlbnRpdGUiOiJxNGZrVXpVQkE5U1oiLCJhcHBsaWNhdGlvbiI6IiJ9XX1dLCJjbGllbnRJZCI6ImNvbnRhY3RAa29uZ2hxLmNvbSIsInByZWZlcnJlZF91c2VybmFtZSI6InNlcnZpY2UtYWNjb3VudC1jb250YWN0QGtvbmdocS5jb20ifQ.fNhYp_gPPWhW30q_8uvHRSxNpwwAmEgHa6GV1d1fPnhcwpvaydbYvvsuuX_lQOHAKX9atBuHN39vMxOv4Peg_8_R-KxOtEK5-2HmbxfhhnFjR0QqECM-Zqd1a_7EyuVEh2CNTJFHIfkRPdUKdBlSFrK6uENxBruvnsINz5FRUcIpY-QEeCqY82VQbtFDGwT0tI97J-3gODxOxp2qrYbsHYSWZAvB0qwXbx_Ht2fJLgllsCE7XO6X795pzRoHya6QOOKd0JWDUDWi5AgpxiT0wPF0hFvxmoifAcdfRIDkqYcReTfsyniCjWncvKoOwnMAa1_HUwVPvqAgkzldYP8A-g
+          value: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6ImtvbmciLCJqa3UiOiJodHRwczovL2tvbmctZ2F0ZXdheTo4NDQzL2F1dGgvbXlkb21haW4vandrcyJ9.eyJjbGllbnRJZCI6ImNvbnRhY3RAa29uZ2hxLmNvbSIsInByb2R1Y3RzIjpbeyJLb25nIEtvbm5lY3QiOnsidmVyc2lvbiI6MjAyNCwic2FhcyI6dHJ1ZX19LHsiS29uZyBHYXRld2F5Ijp7InZlcnNpb24iOjMuOSwic2FhcyI6ZmFsc2V9fV0sImFjciI6IjEiLCJleHAiOjE3NDE4OTExOTMsImNsaWVudEhvc3QiOiI5MC4zLjY2LjIyNyIsImF6cCI6ImNvbnRhY3RAa29uZ2hxLmNvbSIsInNjb3BlIjoib3BlbmlkIGVtYWlsIHByb2ZpbGUiLCJjbGllbnRBZGRyZXNzIjoiOTAuMy42Ni4yMjciLCJpc3MiOiJodHRwczovL2tvbmctZ2F0ZXdheTo4NDQzL2F1dGgvbXlkb21haW4iLCJhdWQiOiJodHRwOi8vaHR0cGJpbi5hcGltLmV1L2FueXRoaW5nIiwiaWF0IjoxNzQxODg5MzkzLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJkZWZhdWx0LXJvbGVzLWplcm9tZSIsInVtYV9hdXRob3JpemF0aW9uIl19LCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzZXJ2aWNlLWFjY291bnQtY29udGFjdEBrb25naHEuY29tIiwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInR5cCI6IkJlYXJlciIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwianRpIjoiYWY4MTQzMDgtZDljMC00OTJjLTllN2ItNWRhNGZlNjU1NjI5Iiwic3ViIjoiY2MxNjNmZjUtYmZjMS00ZDZmLWExYzEtNmIwM2UyOTVmNjJmIiwib2ZmaWNlcyI6eyJzaXRlIjpbIlNhbiBGcmFuY2lzY28gKEhRKSIsIkNoaWNhZ28iLCJMb25kb24iLCJCYW5nYWxvcmUiLCJTaW5nYXBvcmUiLCJTaGFuZ2hhaSIsIkphcGFuIl19fQ.T6BMX9Y8ljjenN5T64PsAIfC-aA6wUk-50Ht3abYe9Z0ulauek8vXy3AvKENMifGq45Pz1yQQh8UW94NlriEmK4NTIKuQ34PdA4JeecXuKnG1qnQs3zBCvimjjdz_Uegxxo2C2ZbaQQ94bZJ7UOw20b-yaX_VikDoN7_m4IbgltvM4x1jew3lLN25msYCaLbkm9s3m_2BBSDVhF81q9M57jYwg0z_wA_HqZKsOogUTEP2MyAGov5J8BM-0IT2dUjQ4NhYMvJE0CbdUaH0RGWwI5U8vYBiiuom3eUgVT5FwGuXWaSWJPpBsHeqvH7w5o5hWTDLfxGIjjITy-UxgspIA
           description: ""
           disabled: false
     parameters: []
@@ -193,9 +193,9 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: req_42961a05a1474c7db2e66c3fbec5474d
-    parentId: fld_a153e0e9278049c4b53424f283f0bc94
-    modified: 1741878043514
+  - _id: req_07abafb927984700955b521de36f8613
+    parentId: fld_e6207df556a6490382afc1aa64a0467b
+    modified: 1741889448767
     created: 1741776092737
     url: http://{{ _.host }}/auth/mydomain/revoke
     name: /auth/mydomain/revoke
@@ -211,7 +211,7 @@ resources:
           disabled: false
         - id: pair_b5e6e92e72b3409cbea8f67c98281fa6
           name: token
-          value: ehbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImprdSI6Imh0dHBzOi8va29uZy1nYXRld2F5Ojg0NDMvYXV0aC9lbmdpZS9qd2tzIiwia2lkIjoia29uZyJ9.eyJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJkZWZhdWx0LXJvbGVzLWplcm9tZSIsInVtYV9hdXRob3JpemF0aW9uIl19LCJleHAiOjE3NDE4Nzk4MTEsImF6cCI6ImNvbnRhY3RAa29uZ2hxLmNvbSIsInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJpc3MiOiJodHRwczovL2tvbmctZ2F0ZXdheTo4NDQzL2F1dGgvZW5naWUiLCJhdWQiOiJodHRwOi8vaHR0cGJpbi5hcGltLmV1L2FueXRoaW5nIiwiaWF0IjoxNzQxODc4MDExLCJ0eXAiOiJCZWFyZXIiLCJzdWIiOiJjYzE2M2ZmNS1iZmMxLTRkNmYtYTFjMS02YjAzZTI5NWY2MmYiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImFjciI6IjEiLCJjbGllbnRIb3N0IjoiOTAuMy42Ni4yMjciLCJjbGllbnRBZGRyZXNzIjoiOTAuMy42Ni4yMjciLCJqdGkiOiIzZmRmOWNlYS1kZTEyLTRhMGQtOWNiYS04OTA1MjExMWZmY2MiLCJzY29wZSI6Im9wZW5pZCBlbWFpbCBwcm9maWxlIiwibGlzdGVSZWZlcmVuY2VTSSI6W3siaWRlbnRpZmlhbnRTSSI6IlB0d3FJbk9FIiwiZW50aXRlIjoiVGJZS1Fsa3ciLCJhcHBsaWNhdGlvbiI6IlA0T054WDFHOGZhZkk2b1BmQiJ9XSwibGlzdGVJZEVuZ2llQjJDUmF0dGFjaGVlcyI6W3siaWRFbmdpZUIyQ0ZpbHMiOiJrRXZyVVJ6IiwiZGF0ZVJhdHRhY2hlbWVudCI6IjIwMjUtMDMtMTNUMTU6MDA6MTFaIiwibGlzdGVSZWZlcmVuY2VTSSI6W3siaWRlbnRpZmlhbnRTSSI6IkUiLCJlbnRpdGUiOiJxNGZrVXpVQkE5U1oiLCJhcHBsaWNhdGlvbiI6IiJ9XX1dLCJjbGllbnRJZCI6ImNvbnRhY3RAa29uZ2hxLmNvbSIsInByZWZlcnJlZF91c2VybmFtZSI6InNlcnZpY2UtYWNjb3VudC1jb250YWN0QGtvbmdocS5jb20ifQ.fNhYp_gPPWhW30q_8uvHRSxNpwwAmEgHa6GV1d1fPnhcwpvaydbYvvsuuX_lQOHAKX9atBuHN39vMxOv4Peg_8_R-KxOtEK5-2HmbxfhhnFjR0QqECM-Zqd1a_7EyuVEh2CNTJFHIfkRPdUKdBlSFrK6uENxBruvnsINz5FRUcIpY-QEeCqY82VQbtFDGwT0tI97J-3gODxOxp2qrYbsHYSWZAvB0qwXbx_Ht2fJLgllsCE7XO6X795pzRoHya6QOOKd0JWDUDWi5AgpxiT0wPF0hFvxmoifAcdfRIDkqYcReTfsyniCjWncvKoOwnMAa1_HUwVPvqAgkzldYP8A-g
+          value: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6ImtvbmciLCJqa3UiOiJodHRwczovL2tvbmctZ2F0ZXdheTo4NDQzL2F1dGgvbXlkb21haW4vandrcyJ9.eyJjbGllbnRJZCI6ImNvbnRhY3RAa29uZ2hxLmNvbSIsInByb2R1Y3RzIjpbeyJLb25nIEtvbm5lY3QiOnsidmVyc2lvbiI6MjAyNCwic2FhcyI6dHJ1ZX19LHsiS29uZyBHYXRld2F5Ijp7InZlcnNpb24iOjMuOSwic2FhcyI6ZmFsc2V9fV0sImFjciI6IjEiLCJleHAiOjE3NDE4OTExOTMsImNsaWVudEhvc3QiOiI5MC4zLjY2LjIyNyIsImF6cCI6ImNvbnRhY3RAa29uZ2hxLmNvbSIsInNjb3BlIjoib3BlbmlkIGVtYWlsIHByb2ZpbGUiLCJjbGllbnRBZGRyZXNzIjoiOTAuMy42Ni4yMjciLCJpc3MiOiJodHRwczovL2tvbmctZ2F0ZXdheTo4NDQzL2F1dGgvbXlkb21haW4iLCJhdWQiOiJodHRwOi8vaHR0cGJpbi5hcGltLmV1L2FueXRoaW5nIiwiaWF0IjoxNzQxODg5MzkzLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJkZWZhdWx0LXJvbGVzLWplcm9tZSIsInVtYV9hdXRob3JpemF0aW9uIl19LCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJzZXJ2aWNlLWFjY291bnQtY29udGFjdEBrb25naHEuY29tIiwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInR5cCI6IkJlYXJlciIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwianRpIjoiYWY4MTQzMDgtZDljMC00OTJjLTllN2ItNWRhNGZlNjU1NjI5Iiwic3ViIjoiY2MxNjNmZjUtYmZjMS00ZDZmLWExYzEtNmIwM2UyOTVmNjJmIiwib2ZmaWNlcyI6eyJzaXRlIjpbIlNhbiBGcmFuY2lzY28gKEhRKSIsIkNoaWNhZ28iLCJMb25kb24iLCJCYW5nYWxvcmUiLCJTaW5nYXBvcmUiLCJTaGFuZ2hhaSIsIkphcGFuIl19fQ.T6BMX9Y8ljjenN5T64PsAIfC-aA6wUk-50Ht3abYe9Z0ulauek8vXy3AvKENMifGq45Pz1yQQh8UW94NlriEmK4NTIKuQ34PdA4JeecXuKnG1qnQs3zBCvimjjdz_Uegxxo2C2ZbaQQ94bZJ7UOw20b-yaX_VikDoN7_m4IbgltvM4x1jew3lLN25msYCaLbkm9s3m_2BBSDVhF81q9M57jYwg0z_wA_HqZKsOogUTEP2MyAGov5J8BM-0IT2dUjQ4NhYMvJE0CbdUaH0RGWwI5U8vYBiiuom3eUgVT5FwGuXWaSWJPpBsHeqvH7w5o5hWTDLfxGIjjITy-UxgspIA
           description: ""
           disabled: false
     parameters: []
@@ -236,8 +236,49 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: env_4d4f7b74b5674df29e95b128a127c5f5
-    parentId: wrk_1d18b66e322b4a4ebe685737a32a8324
+  - _id: req_880d7081c4de42e9a12a77258806d42e
+    parentId: fld_cc73098d7e524580a8af431824395df6
+    modified: 1741891525497
+    created: 1741890664687
+    url: http://{{ _.host }}/restExternalApi/anything
+    name: /restExternalApi
+    description: ""
+    method: GET
+    body: {}
+    parameters:
+      - id: pair_7e160c28580b4bf8b684d67dc5b9b286
+        name: ""
+        value: ""
+        description: ""
+        disabled: false
+    headers:
+      - name: User-Agent
+        value: insomnia/10.2.0
+    authentication:
+      type: none
+    metaSortKey: -1741890669921
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_cc73098d7e524580a8af431824395df6
+    parentId: wrk_69e138e1f5cf411b92da24fb8a166b5f
+    modified: 1741891529413
+    created: 1741890649128
+    name: External REST API (Mocked)
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1741127119596.5
+    environmentType: kv
+    _type: request_group
+  - _id: env_81209a4516c24429a00e0f742a8b3430
+    parentId: wrk_69e138e1f5cf411b92da24fb8a166b5f
     modified: 1741877608144
     created: 1741776092735
     name: Base Environment
@@ -260,8 +301,8 @@ resources:
     environmentType: json
     kvPairData: []
     _type: environment
-  - _id: jar_0fd8d4b840304c89828f8bafef1c830c
-    parentId: wrk_1d18b66e322b4a4ebe685737a32a8324
+  - _id: jar_b436f87393874cfebf8e72d9fd936671
+    parentId: wrk_69e138e1f5cf411b92da24fb8a166b5f
     modified: 1741776092736
     created: 1741776092736
     name: Default Jar
