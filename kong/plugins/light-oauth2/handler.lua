@@ -482,7 +482,7 @@ local function revokeToken(plugin_conf)
   end
   
   -- Get the JWT Payload
-  if not error_verbose and body.token ~= 'all' then
+  if not error_verbose then
     json_token_payload, err = get_JWT_payload (body.token)
     if err then
       error_verbose = "Unable to handle the 'Authorization Bearer' payload: " .. err
