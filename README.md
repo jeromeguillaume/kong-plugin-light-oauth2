@@ -456,4 +456,3 @@ See [collection](/insomnia/Insomnia.yaml)
 - If everything works correctly the jwt.io sends a `Signature Verified` message
 - The public key is downloaded automatically through the `light-oauth2-jwks` route and the `Request Termination` plugin. If it's not the case, open the Browser Developer Tools and see the network tab and console tab. The classic issue is getting the JWKS by using the self-signed Kong certificate (on 8443); it's easy to fix the issue by opening a new tab, going on the `jku` request (i.e. https://kong-gateway:8443/auth/mydomain/jwks), clicking on Advanced and by clicking on `Proceed to`
 - There is a known limitation on jwt.io with `"use": "enc"` the match isn't done correctly and the JWK is not loaded automatically: we simply have to copy/paste the public JWK directly in the `VERIFY SIGNATURE` of the web page. With `"use": "sig"` there is no restriction
-![Alt text](/images/1-JWT.io.jpg "jwt.io")
