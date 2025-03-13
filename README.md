@@ -1,7 +1,7 @@
-# Kong plugin: `light-oauth2` Authorization Server for mydomain
+# Kong plugin: `light-oauth2` Authorization Server
 The plugin offers a Light OAuth2 Authorization Server enabling following capabilities:
 1) Token Instropection
-2) Token Revocation (of a single token or of all tokens)
+2) Token Revocation (of a single token)
     - The tokens are stored in a `ngx.shared` dictionary. Using Redis storage is essential to have a suitable solution running on multiple DataPlane nodes
 3) Token Exchange:
     - Craft a JWT managed by the Light OAuth2 server by copying the input Bearer Authorization JWT
