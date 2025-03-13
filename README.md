@@ -28,8 +28,8 @@ Multiple domains can be used for providing segmentation of authorization and JWT
 ## `light-oauth2` plugin configuration reference
 |FORM PARAMETER                 |DEFAULT          |DESCRIPTION                                                 |
 |:------------------------------|:----------------|:-----------------------------------------------------------|
-|config.api_id_claim|idB2C|The claim name to extract a value (from a JWT) for calling `api_url` REST API by putting the value in `api_url_query_param`|
-|config.api_claims_to_copy|listeReferenceSI|Array of JSON properties for extracting values from the `api_url` call and for injecting/enriching the JWT managed by the Light OAuth2 server|
+|config.api_id_claim|clientId|The claim name to extract a value (from the source JWT) for calling `api_url` REST API by putting the value in `api_url_query_param`|
+|config.api_claims_to_copy|products|Array of JSON properties for extracting values from the `api_url` call and for injecting/enriching the JWT managed by the Light OAuth2 server|
 |config.api_url|https://domain.com/restApi|URL of the External REST API|
 |config.api_url_query_param|paramClientId|Name of the query parameter of `api_url` and the value comes from `api_id_claim`|
 config.auth_domain|mydomain|Domain name of the Light OAuth2 server|
