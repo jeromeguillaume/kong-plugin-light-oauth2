@@ -1,0 +1,85 @@
+openapi: 3.0.2
+info:
+  title: External Rest Api
+  version: 1.0.0
+  description: Send JSON Data
+  contact:
+    name: Kong Inc.
+    url:  https://konghq.com
+    email: contact@konghq.com
+servers:
+- url: https://kong-gateway:8443/restExternalApi
+  description: main server
+tags:
+  - name: external-rest_api
+    description: External Rest Api
+paths:
+  '/anything':
+    get:
+      operationId: get_anything
+      summary: Anything Data
+      description: Returns a JSON Data
+      responses:
+        '200':
+          description: status 200
+          content:
+           application/json:
+              schema:
+                type: object
+                properties:           
+                  offices:
+                    type: object
+                    properties:
+                      site:
+                        type: array
+                        items:
+                          type: string
+                  products:
+                    type: array
+                    items:
+                      type: object
+                      additionalProperties:
+                        type: object
+                        properties:
+                          version:
+                            type: integer
+                          saas:
+                            type: boolean
+              example:
+                offices:
+                  site:
+                    - "San Francisco (HQ)"
+                    - "Chicago"
+                    - "London"
+                    - "Bangalore"
+                    - "Singapore"
+                    - "Shanghai"
+                    - "Japan"
+                products:
+                  - "Kong Konnect":
+                      version: 2024
+                      saas: true
+                  - "Kong Gateway":
+                      version: 3.9
+                      saas: false
+        '404':
+          description: status 404
+          content:
+            application/json:
+              schema:
+                type: array
+              examples:
+                 response:
+                    value:
+                     - error: Not found
+        '503':
+          description: status 503
+          content:
+            application/json:
+              schema:
+                type: array
+              examples:
+                 response:
+                    value:
+                     - error: Service unvailable
+  

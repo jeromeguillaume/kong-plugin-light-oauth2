@@ -1,1 +1,1 @@
-deck gateway dump --konnect-token $KONNECT_TOKEN --konnect-addr https://eu.api.konghq.com --konnect-control-plane-name cp-engie-light-oauth2 --select-tag light-oauth2 -o kong-light-oauth2.yaml
+deck gateway dump --konnect-token $KONNECT_TOKEN --konnect-addr https://eu.api.konghq.com --konnect-control-plane-name cp-mydomain-light-oauth2 --select-tag light-oauth2 -o kong-light-oauth2.yaml

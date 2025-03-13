@@ -82,8 +82,8 @@ resources:
     parentId: fld_0e391af5b3dc4d26bb81b11c69ec69cb
     modified: 1741877227555
     created: 1741776092744
-    url: http://{{ _.host }}/refssi-identites-rattachees
-    name: /refssi-identites-rattachees
+    url: http://{{ _.host }}/external-rest-api
+    name: /external-rest-api
     description: ""
     method: GET
     body: {}
@@ -111,7 +111,7 @@ resources:
     parentId: fld_a153e0e9278049c4b53424f283f0bc94
     modified: 1741877563156
     created: 1741776161144
-    url: http://{{ _.host }}/auth/engie/.well-known/openid-configuration
+    url: http://{{ _.host }}/auth/mydomain/.well-known/openid-configuration
     name: /.well-known
     description: ""
     method: GET
@@ -152,8 +152,8 @@ resources:
     parentId: fld_a153e0e9278049c4b53424f283f0bc94
     modified: 1741878032189
     created: 1741776092738
-    url: http://{{ _.host }}/auth/engie/introspect
-    name: /auth/engie/introspect (admin)
+    url: http://{{ _.host }}/auth/mydomain/introspect
+    name: /auth/mydomain/introspect (admin)
     description: ""
     method: POST
     body:
@@ -197,8 +197,8 @@ resources:
     parentId: fld_a153e0e9278049c4b53424f283f0bc94
     modified: 1741878043514
     created: 1741776092737
-    url: http://{{ _.host }}/auth/engie/revoke
-    name: /auth/engie/revoke
+    url: http://{{ _.host }}/auth/mydomain/revoke
+    name: /auth/mydomain/revoke
     description: ""
     method: POST
     body:
@@ -243,8 +243,8 @@ resources:
     name: Base Environment
     data:
       host: localhost:8000
-      admin_light_oaut2_id: admin@engie.com
-      admin_light_oaut2_pwd: Engie!2025
+      admin_light_oaut2_id: admin@mydomain.com
+      admin_light_oaut2_pwd: mydomain!2025
       contact_id: contact@konghq.com
       contact_secret: SekYdVVQPlEMaq23CF2t4SV2seEI8Pg8
     dataPropertyOrder:

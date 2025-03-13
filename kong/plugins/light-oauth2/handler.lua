@@ -69,21 +69,26 @@ local function getTokenCache(plugin_conf, jti)
 end
 
 ---------------------------------------------------------------------------------------------------
--- Enrich the JWT from the 'refssi-identites-rattachees' REST API
+-- Enrich the JWT from the 'external-rest-api' REST API
 ---------------------------------------------------------------------------------------------------
 local function enrichFromRefssiIdentitesRattachees(plugin_conf, jwt_payload)
   
   local utils = require "kong.tools.utils"
   local http = require "resty.http"
   local httpc = http.new()
-  local errMsg
+  local errMsg  
 
-  kong.log.debug('plugin_conf.api_idengieb2c_claim: ' .. plugin_conf.api_idengieb2c_claim)
-  kong.log.debug('jwt_payload[plugin_conf.api_idengieb2c_claim]: ' .. (jwt_payload[plugin_conf.api_idengieb2c_claim] or 'nil'))
+  kong.log.debug('plugin_conf.api_id_claim: ' .. plugin_conf.api_id_claim)
+  kong.log.debug('jwt_payload[plugin_conf.api_id_claim]: ' .. (jwt_payload[plugin_conf.api_id_claim] or 'nil'))
   kong.log.debug("Send HTTP request to: '" .. 
-                  plugin_conf.api_refssi_identites_rattachees_url .. 
-                  "' with idEngieB2C='"..(jwt_payload[plugin_conf.api_idengieb2c_claim] or 'nil').."'")
-  local res, err = httpc:request_uri(plugin_conf.api_refssi_identites_rattachees_url, { 
+                  plugin_conf.api_url .. 
+                  "' with "..plugin_conf.api_url_query_param.."='"..(jwt_payload[plugin_conf.api_id_claim] or 'nil').."'")
+  
+  if not jwt_payload[plugin_conf.api_id_claim] then
+    return nil, "Unable to find '"..plugin_conf.api_id_claim.."' claim in the input JWT"
+  end
+
+  local res, err = httpc:request_uri(plugin_conf.api_url, { 
       method = "GET",
       headers = {
           ["Content-Type"] = "application/json",
@@ -91,24 +96,25 @@ local function enrichFromRefssiIdentitesRattachees(plugin_conf, jwt_payload)
           ["X-Correlation-Id"] = utils.uuid()
       },
       query = { 
-        idEngieB2C=jwt_payload[plugin_conf.api_idengieb2c_claim]
+        [plugin_conf.api_url_query_param]=jwt_payload[plugin_conf.api_id_claim]
       },
       keepalive_timeout = 10,
       keepalive_pool = 10
       })
+  
   if err then
-    errMsg = "Response Error url='" .. plugin_conf.api_refssi_identites_rattachees_url .. "', err='".. err .. "'"
+    errMsg = "Response Error url='" .. plugin_conf.api_url .. "', err='".. err .. "'"
   elseif res.status ~= 200 then
-    errMsg = "Response Error url='" .. plugin_conf.api_refssi_identites_rattachees_url .. "', httpStatus='".. res.status .. "', body='" .. (res.body or 'nil') .. "'"
+    errMsg = "Response Error url='" .. plugin_conf.api_url .. "', httpStatus='".. res.status .. "', body='" .. (res.body or 'nil') .. "'"
   else
     local cjson = require("cjson.safe").new()
     local api_json, err = cjson.decode(res.body)
     -- If we failed to base64 decode
     if err then
-      errMsg = "Unable to decode JSON url='" .. plugin_conf.api_refssi_identites_rattachees_url .. "', err='".. err .. "'"
+      errMsg = "Unable to decode JSON url='" .. plugin_conf.api_url .. "', err='".. err .. "'"
     else
-      kong.log.debug("Response Ok url='" .. plugin_conf.api_refssi_identites_rattachees_url .. "', httpStatus='".. res.status .. "', body='" .. (res.body or 'nil') .. "'")
-      -- Enrich the JWT claims by using 'refssi-identites-rattachees" REST API
+      kong.log.debug("Response Ok url='" .. plugin_conf.api_url .. "', httpStatus='".. res.status .. "', body='" .. (res.body or 'nil') .. "'")
+      -- Enrich the JWT claims by using 'external-rest-api" REST API
       for i = 1, #plugin_conf.api_claims_to_copy do
         if api_json[plugin_conf.api_claims_to_copy[i]] then
           jwt_payload [plugin_conf.api_claims_to_copy[i]] = api_json[plugin_conf.api_claims_to_copy[i]]
@@ -123,7 +129,7 @@ local function enrichFromRefssiIdentitesRattachees(plugin_conf, jwt_payload)
 end
 
 ---------------------------------------------------------------------------------------------------
--- Craft the JWT 'x-engie-jwt' and Sign it having a JWS
+-- Craft the JWT 'x-mydomain-jwt' and Sign it having a JWS
 ---------------------------------------------------------------------------------------------------
 local function jwtCrafterSigner(data, plugin_conf)
   

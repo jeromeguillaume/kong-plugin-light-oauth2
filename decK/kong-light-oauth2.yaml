@@ -4,16 +4,16 @@ _info:
   select_tags:
   - light-oauth2
 _konnect:
-  control_plane_name: cp-engie-light-oauth2
+  control_plane_name: cp-mydomain-light-oauth2
 consumers:
 - acls:
   - group: admin
   basicauth_credentials:
-  - password: d436fa93c2b50d66fc1431dd1385f480727642af
-    username: admin@engie.com
+  - password: d5aaaf1c618e81270c35cd824b30aad64a4c39d9
+    username: admin@mydomain.com
   jwt_secrets:
   - algorithm: RS256
-    key: https://kong-gateway:8443/auth/engie
+    key: https://kong-gateway:8443/auth/mydomain
     rsa_public_key: |-
       -----BEGIN PUBLIC KEY-----
       MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAk9YtH6CpbOc9Kz3uOGXm
@@ -25,14 +25,14 @@ consumers:
       JQIDAQAB
       -----END PUBLIC KEY-----
     secret: bhzsqaHaf9TfXspEhBCaKsJ7OjtduL7O
-  username: admin@engie.com
+  username: admin@mydomain.com
 - username: user1@konghq.com
 routes:
 - https_redirect_status_code: 426
   name: light-oauth2-introspect
   path_handling: v0
   paths:
-  - /auth/engie/introspect
+  - /auth/mydomain/introspect
   plugins:
   - config:
       allow:
@@ -85,12 +85,12 @@ routes:
   - config:
       api_claims_to_copy:
       - listeReferenceSI
-      api_idengieb2c_claim: idB2C
-      api_refssi_identites_rattachees_url: http://localhost
-      auth_domain: engie
+      api_id_claim: idB2C
+      api_url: http://localhost
+      auth_domain: mydomain
       expires_in: 1800
-      iss: https://kong-gateway:8443/auth/engie
-      jku: https://kong-gateway:8443/auth/engie/jwks
+      iss: https://kong-gateway:8443/auth/mydomain
+      jku: https://kong-gateway:8443/auth/mydomain/jwks
       jwt_header_downstream: null
       jwt_header_upstream: Authorization
       private_jwk: '{"kty": "RSA","kid": "kong",...<***CHANGE_ME***>}'
@@ -146,7 +146,7 @@ routes:
   name: light-oauth2-jwks
   path_handling: v0
   paths:
-  - /auth/engie/jwks
+  - /auth/mydomain/jwks
   plugins:
   - config:
       credentials: false
@@ -202,7 +202,7 @@ routes:
   name: light-oauth2-revoke
   path_handling: v0
   paths:
-  - /auth/engie/revoke
+  - /auth/mydomain/revoke
   plugins:
   - config:
       allow:
@@ -234,12 +234,12 @@ routes:
   - config:
       api_claims_to_copy:
       - listeReferenceSI
-      api_idengieb2c_claim: idB2C
-      api_refssi_identites_rattachees_url: http://localhost
-      auth_domain: engie
+      api_id_claim: idB2C
+      api_url: http://localhost
+      auth_domain: mydomain
       expires_in: 1800
-      iss: https://kong-gateway:8443/auth/engie
-      jku: https://kong-gateway:8443/auth/engie/jwks
+      iss: https://kong-gateway:8443/auth/mydomain
+      jku: https://kong-gateway:8443/auth/mydomain/jwks
       jwt_header_downstream: null
       jwt_header_upstream: Authorization
       private_jwk: '{"kty": "RSA","kid": "kong",...<***CHANGE_ME***>}'
@@ -264,7 +264,7 @@ routes:
   name: light-oauth2-well-known
   path_handling: v0
   paths:
-  - /auth/engie/.well-known/openid-configuration
+  - /auth/mydomain/.well-known/openid-configuration
   plugins:
   - config:
       credentials: false
@@ -293,11 +293,12 @@ routes:
     - http
     - https
   - config:
-      body: '{   "issuer": "https://kong-gateway:8443/auth/engie",   "jwks_uri": "https://kong-gateway:8443/auth/engie/jwks",   "introspection_endpoint":
-        "https://kong-gateway:8443/auth/engie/introspect", "introspection_endpoint_auth_methods_supported":
+      body: '{   "issuer": "https://kong-gateway:8443/auth/mydomain",   "jwks_uri":
+        "https://kong-gateway:8443/auth/mydomain/jwks",   "introspection_endpoint":
+        "https://kong-gateway:8443/auth/mydomain/introspect", "introspection_endpoint_auth_methods_supported":
         [        "client_secret_basic"   ],   "introspection_endpoint_auth_signing_alg_values_supported":
         [       "HS256",       "HS512",       "RS256",       "RS512"   ],   "revocation_endpoint":
-        "https://kong-gateway:8443/auth/engie/revoke",   "revocation_endpoint_auth_methods_supported":
+        "https://kong-gateway:8443/auth/mydomain/revoke",   "revocation_endpoint_auth_methods_supported":
         [     "client_secret_basic"   ],   "revocation_endpoint_auth_signing_alg_values_supported":
         [       "HS256",       "HS512",       "RS256",       "RS512"   ] }'
       content_type: application/json
@@ -321,76 +322,45 @@ routes:
   response_buffering: true
   strip_path: true
 - https_redirect_status_code: 426
-  name: mocking-RefssiIdentitesRattachees
+  name: mocking_external-rest-api
   path_handling: v0
   paths:
-  - /refssi-identites-rattachees
+  - /restExternalApi
   plugins:
   - config:
-      api_specification: "swagger: \"2.0\"\ninfo:\n  version: \"1.0.0\"\n  title:
-        \"refssi-identites-rattachees\"\n  description: \"Permet de consulter les
-        références Si d'un idEngieB2C ainsi que les références Si de ses identités
-        rattachées\"\n  termsOfService: \"https://taiga.factory.api.engie.fr/project/api-set/wiki/home\"\n
-        \ contact:\n    name: \"API-OWNER\"\n    email: \"gael.tranchant@engie.com\"\nhost:
-        \"engie-dgp-noprod-acc.apigee.net\"\nbasePath: \"/smi/v1/\"\nschemes:\n  -
-        \"https\"\nsecurityDefinitions:\n  OAuth2-application:\n    type: oauth2\n
-        \   flow: \"application\"\n    tokenUrl: \"https://apis.dgp-itt.engie.fr/oauth2/v1/token\"\nconsumes:\n
-        \ - \"application/json\"\nproduces:\n  - \"application/json\"\npaths:\n  /refssi-identites-rattachees:\n
-        \   get:\n      description: \"Permet de récupérer pour un idEngieB2C, les
-        références si de cet idEngieB2C et la liste des identité rattachée a cet ID
-        et leurs références si liées\"\n      security:\n        - OAuth2-application:
-        []\n      parameters:\n        - name: \"X-Correlation-Id\"\n          in:
-        \"header\"\n          description: \"Universally Unique IDentifier (UUID)
-        de traçabilité\"\n          required: true\n          type: \"string\"\n          format:
-        \"uuid\"\n          x-example: \"a5811318-591d-43b3-80ed-5f2618d75e2b\"\n
-        \       - name: \"idEngieB2C\"\n          in: \"query\"\n          description:
-        \"L'identifiant B2C de l'individu\"\n          type: \"string\"\n          format:
-        \"uuid\"\n          required: true\n          x-example: \"a5811318-591d-43b3-80ed-5f2618d75e2b\"
-        \n      responses:\n        \"200\":\n          description: \"La liste des
-        références si de cet idEngieB2C et la liste des identité rattachée a cet ID
-        et leurs références si liées\"\n          schema:\n            $ref: '#/definitions/RefssiIdentitesRattachees'\n
-        \       \"400\":\n          description: \"La requête est invalide\"\n          schema:\n
-        \           $ref: '#/definitions/Error'\n        \"401\":\n          description:
-        \"La clé d'API n'est pas valide\"\n          schema:\n            $ref: '#/definitions/Error'\n
-        \       \"404\":\n          description: \"La ressource demandée n’existe
-        pas\"\n          schema:\n            $ref: '#/definitions/Error'\n        \"405\":\n
-        \         description: \"La méthode appelée n’est pas disponible sur cette
-        ressource\"\n          schema:\n            $ref: '#/definitions/Error'\n
-        \       \"429\":\n          description: \"Le client a émis trop de requêtes
-        dans un délai donné\"\n          schema:\n            $ref: '#/definitions/Error'\n
-        \       \"500\":\n          description: \"La requête est correcte mais une
-        erreur est survenue côté serveur\"\n          schema:\n            $ref: '#/definitions/Error'\n
-        \       \"503\":\n          description: \"La requête est correcte mais le
-        service demandé n’est pas disponible\"\n          schema:\n            $ref:
-        '#/definitions/Error'\n        default:\n          description: \"Une erreur
-        inattendue est survenue\"\n          schema:\n            $ref: '#/definitions/Error'\ndefinitions:\n
-        \ RefssiIdentitesRattachees:\n    type: object\n    properties:\n      idEngieB2C:\n
-        \         description: \"L'identifiant B2C de l'individu\"\n          type:
-        \"string\"\n          format: \"uuid\"\n          x-example: \"a5811318-591d-43b3-80ed-5f2618d75e2b\"\n
-        \     listeReferenceSI:\n        description: \"Liste des référenceSi de l'individu\"\n
-        \       type: array\n        items:\n          $ref: '#/definitions/ReferenceSi'\n
-        \     listeIdEngieB2CRattachees:\n        description: \"Liste des idEngieB2C
-        rattachés de l'individu\"\n        type: array\n        items:\n          $ref:
-        '#/definitions/IdentitesRatachees'\n  ReferenceSi:\n    properties:\n        application:\n
-        \         description: \"Application de référénce\"\n          type: \"string\"\n
-        \         readOnly: true\n          x-example: \"Symphonie\"\n        entite:\n
-        \         description: \"Entité de l'applicartion\"\n          type: \"string\"\n
-        \         readOnly: true\n          x-example: \"DGP\"\n        identifiantSI:\n
-        \         description: \"Identifiant dans le SI correspondant\"\n          type:
-        \"string\"\n          x-example: \"307980889\"\n  IdentitesRatachees:\n    properties:\n
-        \       idEngieB2CFils:\n          description: \"L'identifiant B2C fils de
-        l'individu\"\n          type: \"string\"\n          format: \"uuid\"\n          x-example:
-        \"a5811318-591d-43b3-80ed-5f2618d75e2b\"   \n        dateRattachement:\n          description:
-        \"Date du rattachement entre l'individu 'père' et de l'individu 'fils'\"\n
-        \         type: \"string\"\n          format: \"date-time\"\n          x-example:
-        \"2019-03-16 02:36:57\"\n        listeReferenceSI:\n          description:
-        \"Liste des référenceSi de l'individu\"\n          type: array\n          items:\n
-        \           $ref: '#/definitions/ReferenceSi'\n  Error:\n    properties:\n
-        \     code:\n        type: \"string\"\n      name:\n        type: \"string\"\n
-        \     message:\n        type: \"string\""
+      api_specification: "openapi: 3.0.2\ninfo:\n  title: External Rest Api\n  version:
+        1.0.0\n  description: Send JSON Data\n  contact:\n    name: Kong Inc.\n    url:
+        \ https://konghq.com\n    email: contact@konghq.com\nservers:\n- url: https://kong-gateway:8443/restExternalApi\n
+        \ description: main server\ntags:\n  - name: external-rest_api\n    description:
+        External Rest Api\npaths:\n  '/anything':\n    get:\n      operationId: get_anything\n
+        \     summary: Anything Data\n      description: Returns a JSON Data\n      responses:\n
+        \       '200':\n          description: status 200\n          content:\n           application/json:\n
+        \             schema:\n                type: object\n                properties:
+        \          \n                  offices:\n                    type: object\n
+        \                   properties:\n                      site:\n                        type:
+        array\n                        items:\n                          type: string\n
+        \                 products:\n                    type: array\n                    items:\n
+        \                     type: object\n                      additionalProperties:\n
+        \                       type: object\n                        properties:\n
+        \                         version:\n                            type: integer\n
+        \                         saas:\n                            type: boolean\n
+        \             example:\n                offices:\n                  site:\n
+        \                   - \"San Francisco (HQ)\"\n                    - \"Chicago\"\n
+        \                   - \"London\"\n                    - \"Bangalore\"\n                    -
+        \"Singapore\"\n                    - \"Shanghai\"\n                    - \"Japan\"\n
+        \               products:\n                  - \"Kong Konnect\":\n                      version:
+        2024\n                      saas: true\n                  - \"Kong Gateway\":\n
+        \                     version: 3.9\n                      saas: false\n        '404':\n
+        \         description: status 404\n          content:\n            application/json:\n
+        \             schema:\n                type: array\n              examples:\n
+        \                response:\n                    value:\n                     -
+        error: Not found\n        '503':\n          description: status 503\n          content:\n
+        \           application/json:\n              schema:\n                type:
+        array\n              examples:\n                 response:\n                    value:\n
+        \                    - error: Service unvailable"
       api_specification_filename: null
       custom_base_path: null
-      include_base_path: false
+      include_base_path: true
       included_status_codes: null
       max_delay_time: 1
       min_delay_time: 0.001
@@ -474,10 +444,10 @@ services:
         - query
         - body
         client_id:
-        - admin@engie.com
+        - admin@mydomain.com
         client_jwk: null
         client_secret:
-        - Engie!2025
+        - mydomain!2025
         cluster_cache_redis:
           cluster_addresses: null
           cluster_max_redirections: 5
@@ -566,7 +536,7 @@ services:
         introspection_post_args_names: null
         introspection_post_args_values: null
         introspection_token_param_name: token
-        issuer: http://localhost:8000//auth/engie/.well-known/openid-configuration
+        issuer: http://localhost:8000//auth/mydomain/.well-known/openid-configuration
         issuers_allowed: null
         jwt_session_claim: sid
         jwt_session_cookie: null
@@ -773,14 +743,14 @@ services:
     plugins:
     - config:
         api_claims_to_copy:
-        - listeReferenceSI
-        - listeIdEngieB2CRattachees
-        api_idengieb2c_claim: idB2C
-        api_refssi_identites_rattachees_url: http://localhost:8000/refssi-identites-rattachees
-        auth_domain: engie
-        expires_in: 30
-        iss: https://kong-gateway:8443/auth/engie
-        jku: https://kong-gateway:8443/auth/engie/jwks
+        - offices
+        - products
+        api_id_claim: clientId
+        api_url: http://localhost:8000/restExternalApi/anything
+        auth_domain: mydomain
+        expires_in: 1800
+        iss: https://kong-gateway:8443/auth/mydomain
+        jku: https://kong-gateway:8443/auth/mydomain/jwks
         jwt_header_downstream: null
         jwt_header_upstream: Authorization
         private_jwk: '{ "p": "8R6DlZVPrq_18PvBpW15aUt5WsgSSR9pkKq-NKzTCCAN2sv60WviPwAHWq73oxmH3CQjRxNoB9gWX4gKqvZa7BzM_zriHhkb2PzqzRc7ctAXfgZx__CV0e2FPb-7FFypuGeRetHSKmINkymPReU2M4_kC-CWHvl0rAFQFSZzMBU",
